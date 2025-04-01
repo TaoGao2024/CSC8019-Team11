@@ -1,3 +1,13 @@
+/*
+ * Creation Date: Mar 29, 2025
+ * Class for RouteStop entity's ID, establishing a compound
+ * primary key with the route and stop ids
+ *
+ * @author Samuel Leung
+ * @version 1.0
+ *
+ *
+ */
 package com.team11.castleproj.Entity;
 
 import jakarta.persistence.Embeddable;

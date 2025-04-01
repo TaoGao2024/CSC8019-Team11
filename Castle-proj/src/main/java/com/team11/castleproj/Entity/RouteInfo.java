@@ -1,3 +1,16 @@
+/*
+ * Creation Date: Mar 29, 2025
+ * Class for RouteInfo entity's schema, including its price,
+ * availability (e.g. weekday, sunday), whether route is in castle direction,
+ * and travel time in minutes
+ *
+ * @author Samuel Leung
+ * @version 1.0
+ *
+ *
+ *
+ */
+
 package com.team11.castleproj.Entity;
 
 import jakarta.persistence.Entity;

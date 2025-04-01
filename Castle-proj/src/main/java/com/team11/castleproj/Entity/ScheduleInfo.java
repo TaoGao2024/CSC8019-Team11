@@ -1,3 +1,13 @@
+/*
+ * Creation Date: Mar 29, 2025
+ * Class for ScheduleInfo entity's schema, including an existing
+ * departure and arrival time for a given route
+ *
+ * @author Samuel Leung
+ * @version 1.0
+ *
+ *
+ */
 package com.team11.castleproj.Entity;
 
 import jakarta.persistence.Column;
