@@ -24,8 +24,8 @@ import lombok.Data;
 public class StopInfo {
     @Id
     private int stopId;
-    private String name;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
+    private String name;
     private String instructions;
 }
