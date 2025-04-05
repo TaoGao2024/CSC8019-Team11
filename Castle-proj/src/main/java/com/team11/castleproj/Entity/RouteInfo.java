@@ -22,8 +22,8 @@ import lombok.Data;
 @Table(name="RouteInfo")
 public class RouteInfo {
     @Id
-    private int routeId;
-    private int castleId;
+    private String routeId;
+    private String castleId;
     private double price;
 
     @Column(nullable = false)

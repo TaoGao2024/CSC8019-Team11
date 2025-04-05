@@ -23,7 +23,7 @@ import lombok.Data;
 @Table(name="StopInfo")
 public class StopInfo {
     @Id
-    private int stopId;
+    private String stopId;
 
     @Column(nullable = false)
     private String name;

@@ -1,1 +1,0 @@
-INSERT INTO CastleInfo VALUES (1, 'Alnwick Castle', 'a castle south of newcastle', 1.1);

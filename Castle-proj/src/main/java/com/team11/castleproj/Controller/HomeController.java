@@ -16,20 +16,19 @@ public class HomeController {
     public HomeController(CastleInfoRepository castleInfoRepository) {
         this.castleInfoRepository = castleInfoRepository;
     }
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home(){
         return "index.html";
     }
-    @RequestMapping("/itinerary")
+    @GetMapping("/itinerary")
     public String itinerary(){
         return "output.html";
     }
-
-    @RequestMapping("/bustimes")
+    @GetMapping("/bustimes")
     public String getBusTimes(Model model){
-        List<CastleInfo> castles = castleInfoRepository.findByName("Alnwick Castle");
+        List<CastleInfo> castles = castleInfoRepository.findByName("Alnwick castle");
         model.addAttribute("castles", castles);
-//        System.out.println(castles.get(0).getName());
+        System.out.println("QUERY OUTPUT");
         System.out.println(castles);
         return "output.html";
     }

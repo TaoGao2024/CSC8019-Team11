@@ -25,7 +25,7 @@ import lombok.Data;
 public class CastleInfo {
     @Id
     @Column(name = "CASTLEID")
-    private int castleId;
+    private String castleId;
     @Column(name = "NAME")
     private String name;
     @Column(name = "DESCRIPTION")

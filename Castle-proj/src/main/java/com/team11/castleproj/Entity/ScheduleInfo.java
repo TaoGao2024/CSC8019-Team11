@@ -21,8 +21,11 @@ import lombok.Data;
 @Table(name="ScheduleInfo")
 public class ScheduleInfo {
     @Id
-    private int scheduleId;
-    private int routeId;
+    private String scheduleId;
+    @Column(nullable = false)
+    private String routeId;
+    @Column(nullable = false)
     private String departTime;
+    @Column(nullable = false)
     private String arriveTime;
 }

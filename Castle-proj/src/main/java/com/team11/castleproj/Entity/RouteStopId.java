@@ -16,12 +16,12 @@ import java.util.Objects;
 
 @Embeddable
 public class RouteStopId implements Serializable {
-    private int routeId;
-    private int stopId;
+    private String routeId;
+    private String stopId;
 
     public RouteStopId() {}
 
-    public RouteStopId(int routeId, int stopId) {
+    public RouteStopId(String routeId, String stopId) {
         this.routeId = routeId;
         this.stopId = stopId;
     }
