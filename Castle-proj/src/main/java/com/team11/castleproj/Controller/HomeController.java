@@ -16,14 +16,17 @@ public class HomeController {
     public HomeController(CastleInfoRepository castleInfoRepository) {
         this.castleInfoRepository = castleInfoRepository;
     }
+
     @GetMapping("/")
     public String home(){
         return "index.html";
     }
+
     @GetMapping("/itinerary")
     public String itinerary(){
         return "output.html";
     }
+
     @GetMapping("/bustimes")
     public String getBusTimes(Model model){
         List<CastleInfo> castles = castleInfoRepository.findByName("Alnwick castle");
@@ -32,5 +35,20 @@ public class HomeController {
         System.out.println(castles);
         return "output.html";
     }
-}
 
+    @GetMapping("/castle-detail")
+    public String getCastleDetail(@RequestParam("name") String name, Model model) {
+        List<CastleInfo> result = castleInfoRepository.findByName(name);
+        if (!result.isEmpty()) {
+            model.addAttribute("castle", result.get(0));
+        }
+        return "castle_detail.html";
+    }
+
+    private double calculateTotalPrice(double entryFee, int passengers) {
+        double busTicketPrice = 2.50 * 2;
+        return (busTicketPrice + entryFee) * passengers;
+    }
+
+
+}
