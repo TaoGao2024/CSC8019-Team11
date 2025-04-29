@@ -10,11 +10,10 @@
  */
 package com.team11.castleproj.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.LocalTime;
 
 @Data
 @Entity
@@ -25,7 +24,11 @@ public class ScheduleInfo {
     @Column(nullable = false)
     private String routeId;
     @Column(nullable = false)
-    private String departTime;
+    private LocalTime departTime;
     @Column(nullable = false)
-    private String arriveTime;
+    private LocalTime arriveTime;
+
+    @ManyToOne
+    @JoinColumn(name = "routeId", referencedColumnName = "routeId", insertable = false, updatable = false)
+    private RouteInfo route;
 }
