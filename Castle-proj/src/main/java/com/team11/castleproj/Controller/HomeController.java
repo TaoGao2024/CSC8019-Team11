@@ -42,11 +42,12 @@ public class HomeController {
 
     @GetMapping("/castle")
     public String getCastleDetail(@RequestParam("name") String name, Model model) {
-        Optional<CastleInfo> result = castleInfoRepository.findByName(name);
-        result.ifPresentOrElse(
-                castle-> model.addAttribute("castle",castle),
-                () -> model.addAttribute("error", "Castle not found")
-        );
+        List<CastleInfo> result = castleInfoRepository.findByName(name);
+//        System.out.println(result.get(0).getCastleId());
+//        result.ifPresentOrElse(
+//                castle-> model.addAttribute("castle",castle),
+//                () -> model.addAttribute("error", "Castle not found")
+//        );
         return "castle_detail.html";
     }
 
@@ -72,25 +73,38 @@ public class HomeController {
 
 
     @GetMapping("/schedules")
-    public String selectSchedule(@RequestParam("startTime")LocalTime startTime,
-                                 @RequestParam("endTime")LocalTime endTime,
-                                 @RequestParam("castleId")String castleId,
+    public String selectSchedule(@RequestParam("departTime")LocalTime departTime,
+                                 @RequestParam("returnTime")LocalTime returnTime,
+                                 @RequestParam("castleName")String castleName,
+                                 @RequestParam("noOfVisitors")int noOfVisitors,
                                  Model model) {
+        List<CastleInfo> castleInfoList = castleInfoRepository.findByName(castleName);
+        String castleId = castleInfoList.get(0).getCastleId();
+        double entryFee = castleInfoList.get(0).getEntryFee();
 
-        List<ScheduleInfo> outboundSchedules = scheduleInfoRepository.findOutboundSchedules(startTime,endTime,castleId);
+        List<ScheduleInfo> outboundSchedules = scheduleInfoRepository.findOutboundSchedules(departTime,departTime.plusHours(1),castleId);
 
         List<RoundTripDTO> roundTripList = new ArrayList<>();
+        List<Double> totalPriceList = new ArrayList<>();
 
         for(ScheduleInfo outbound : outboundSchedules){
-            LocalTime minReturnTime = outbound.getArriveTime().plusHours(2);
-            List<ScheduleInfo> returnOptions = scheduleInfoRepository.findReturnSchedules(castleId,minReturnTime);
+
+            List<ScheduleInfo> returnOptions = scheduleInfoRepository.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
             for(ScheduleInfo returnOption : returnOptions){
-                RoundTripDTO dto = new RoundTripDTO();
-                dto.setOutboundSchedule(outbound);
-                dto.setReturnSchedule(returnOption);
-                roundTripList.add(dto);
+                if(outbound.getArriveTime().plusHours(2).isBefore(returnOption.getDepartTime())){
+                    RoundTripDTO dto = new RoundTripDTO();
+                    dto.setOutboundSchedule(outbound);
+                    dto.setReturnSchedule(returnOption);
+                    roundTripList.add(dto);
+
+                    double routePrice = dto.getTotalPrice();
+                    double totalPrice = (routePrice + entryFee) * noOfVisitors;
+                    totalPriceList.add(totalPrice);
+                }
             }
         }
+        System.out.println(roundTripList);
+        System.out.println(totalPriceList);
         model.addAttribute("roundTripList",roundTripList);
         return "schedules.html";
     }

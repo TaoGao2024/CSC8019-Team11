@@ -10,5 +10,7 @@ import java.util.Optional;
 
 public interface CastleInfoRepository extends JpaRepository<CastleInfo, Integer> {
     @Query("SELECT c FROM CastleInfo c WHERE c.name = :name")
-    Optional<CastleInfo> findByName(@Param("name") String name);
+    List<CastleInfo> findByName(@Param("name") String name);
+
+
 }
