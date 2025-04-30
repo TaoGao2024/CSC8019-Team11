@@ -74,11 +74,6 @@ public class HomeController {
                                  Model model) {
         List<CastleInfo> castleInfoList = castleInfoRepository.findByName(castleName);
         
-        if (castleInfoList.isEmpty()) {
-            model.addAttribute("error", "找不到城堡信息: " + castleName);
-            return "error"; // 需要创建error.html页面
-        }
-        
         String castleId = castleInfoList.get(0).getCastleId();
         double entryFee = castleInfoList.get(0).getEntryFee();
 
