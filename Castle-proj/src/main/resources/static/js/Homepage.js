@@ -98,16 +98,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      localStorage.setItem('selectedCastle', selectedCastle);
-      localStorage.setItem('departureTime', departureTime);
-      localStorage.setItem('returnTime', returnTime);
-      localStorage.setItem('visitorNumber', visitorNumber);
+      const params = new URLSearchParams({
+        departTime: departureTime,
+        returnTime: returnTime,
+        castleName: selectedCastle,
+        noOfVisitors: visitorNumber
+      });
 
-      const itineraryUrl = `/itinerary?castle=${selectedCastle}&time=${departureTime}&return=${returnTime}&visitors=${visitorNumber}`;
-
-      console.log("Redirecting to URL:", itineraryUrl);
-
-      window.location.href = itineraryUrl;
+      window.location.href = `/itinerary?${params.toString()}`;
     });
   }
 document.querySelectorAll('.info-btn').forEach(button => {
