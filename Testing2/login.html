@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="HomePageStyle.css"/>
+</head>
+
+<body class="auth-body">
+  <div class="auth-container">
+    <h2>Login</h2>
+    <input type="text" id="login-username" placeholder="Username" />
+    <input type="password" id="login-password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="register.html">Register here</a></p>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById("login-username").value.trim();
+      const password = document.getElementById("login-password").value;
+
+      if (!username || !password) {
+        alert("Please enter both username and password.");
+        return;
+      }
+
+      const storedUser = localStorage.getItem("user_" + username);
+      if (!storedUser) {
+        alert("User not found. Please register.");
+        return;
+      }
+
+      const parsedUser = JSON.parse(storedUser);
+      if (parsedUser.password !== password) {
+        alert("Incorrect password.");
+        return;
+      }
+
+      // 登录成功
+      localStorage.setItem("loggedInUser", username);
+      window.location.href = "HomePage.html";
+    }
+  </script>
+</body>
+</html>
+

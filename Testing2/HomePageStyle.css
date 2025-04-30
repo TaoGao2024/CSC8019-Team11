@@ -1,0 +1,400 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.hero {
+    background: url('images/background.jpg') no-repeat top center;
+    background-size: cover;
+    height: 550px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* 暗化背景以提升可读性 */
+.hero-overlay {
+    position: absolute;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 40px;
+    box-sizing: border-box;
+}
+
+/* 左右两侧导航布局 */
+.hero-bar {
+    width: 100%;
+    color: white;
+    display: flex;
+    box-sizing: border-box;
+    background-color: rgba(4, 58, 6, 0.8);
+    padding: 12px 30px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero,
+.hero-overlay {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+
+.logo {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+}
+
+.top-right-controls {
+    display: flex;
+    align-items: ceter;
+}
+
+
+/* 搜索和用户图标按钮 */
+.icon-btn {
+  background: transparent;
+  border: none;
+  font-size: 25px;
+  color: white;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.icon-btn:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+
+.search-box {
+    display: none;
+    position: fixed;
+    top: 100px;
+    right: 40px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.search-box.active {
+    display: block;
+}
+
+.search-box input {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.search-box button {
+    padding: 8px 12px;
+    font-size: 14px;
+    margin-left: 8px;
+    background-color: rgba(4, 58, 6, 0.8);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Plan Trip Button with Press Effect */
+.plan-btn {
+    background-color: rgba(4, 58, 6, 0.8);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+
+.plan-btn:active {
+  transform: scale(0.95); /* Press down effect */
+  background: #3c69b3;
+}
+
+/* Dropdown Filter Row */
+.filter-bar {
+    width: 100%;
+    background-color: white;
+    padding: 20px 0;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+}
+
+.filter-container {
+    max-width: 1000px;
+    display: flex;
+    margin: 0 auto;
+    grid-gap: 60px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  min-width: 450px;
+}
+
+/* 下拉框样式 */
+.filter-field select {
+  margin-top: 10px;
+  padding: 15px 5px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  cursor: pointer;
+}
+
+
+/* Castle Grid - Displays Two Castles Per Row */
+.castle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+    padding: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.castle {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+
+.castle img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
+
+.castle h3 {
+  margin: 16px 0 6px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.castle p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+  padding: 0 10px;
+}
+
+.castle .plan-btn {
+  margin: 0 auto;
+  padding: 8px 20px;
+  font-size: 14px;
+  background-color: rgba(4, 58, 6, 0.8);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.castle .plan-btn:hover {
+  background-color: rgba(4, 58, 6, 0.8);
+}
+
+.user-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  grid-gap: 10px;
+  color: white;
+  font-size: 16px;
+}
+
+/* 下拉菜单定位在头像下方 */
+.user-section .dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 130px;
+  z-index: 999;
+}
+
+/* 下拉菜单链接样式 */
+.user-section .dropdown a {
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.user-section .dropdown a:hover {
+  background-color: #f2f2f2;
+}
+
+/* 控制显示隐藏 */
+.hidden {
+  display: none !important;
+}
+
+
+.auth-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f4f4f4;
+}
+
+.auth-container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 15px;
+}
+
+.auth-container input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.auth-container button {
+  background: rgba(4, 58, 6, 0.8);
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+/* Adapt to mobile devices */
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0px !important;
+      margin: 0px !important; 
+    font-size: 14px !important;
+  }
+
+  .hero {
+    height: auto !important;
+    background-position: center !important;
+    overflow: visible !important;
+    width: 100vw !important;
+      padding: 0px !important;
+      margin: 0px !important; 
+  }
+
+  .hero-overlay {
+    position: relative !important;
+    height: auto !important;
+    padding: 0px !important;
+    background: rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    overflow: visible !important;
+      width: 100%;
+  }
+
+  .hero-bar {
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 10px 20px !important;
+    grid-gap: 10px;
+    width: 100% !important;
+  }
+
+  .logo {
+    font-size: 30px !important;
+    text-align: left;
+  }
+
+  .top-right-controls {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-end;
+    grid-gap: 10px;
+  }
+
+  .user-section {
+    display: flex !important;
+    align-items: center;
+    grid-gap: 10px;
+  }
+
+  .search-box {
+    right: 20px !important;
+    top: 120px !important;
+    width: 90% !important;
+  }
+
+  .castle-grid {
+    grid-template-columns: 1fr !important;
+    padding: 10px !important;
+  }
+
+  .filter-container {
+    flex-direction: column !important;
+    grid-gap: 20px !important;
+  }
+
+  .filter-field {
+    min-width: 100% !important;
+  }
+
+  .auth-container {
+    width: 100% !important;
+    box-shadow: none !important;
+    padding: 20px !important;
+  }
+
+  .page-content {
+    padding: 20px 10px !important;
+    flex-direction: column !important;
+  }
+
+  .info-card {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+}
+

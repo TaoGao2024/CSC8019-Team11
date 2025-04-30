@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castle Trip Planner - Home</title>
+    <link rel="stylesheet" href="HomePageStyle.css">
+    <style>
+        .search-box {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+        }
+
+        .search-box.active {
+            max-height: 100px;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section with Background Image -->
+    <header class="hero">
+        <div class="hero-overlay">
+            <div class="hero-bar">
+                <div class="logo">Historical Castles</div>
+                <div class="top-right-controls">
+                    <button class="icon-btn" id="searchBtn"><i class="fas fa-magnifying-glass"></i></button>
+
+                    <div class="user-section">
+                        <button class="icon-btn" id="userIconBtn"><i class="fas fa-user"></i></button>
+                        <span id="user-name" class="hidden"></span>
+                        <div class="dropdown hidden" id="dropdown">
+
+                            <!-- 登陆前显示sign in -->
+                            <a href="login.html" id="sign-in-option">Sign In</a>
+
+                            <a href="UserAccountPage.html" class="auth-only hidden" id="account-link">My Account</a>
+                            <a href="#" class="auth-only hidden" id="logout-btn">Log out</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    <div class="search-box" id="search-box">
+                <input type="text" id="search-input" placeholder="Search for castles...">
+                <button id="searchSubmitBtn">Search</button>
+            </div>
+    </header>
+
+
+    <section class="filter-bar">
+        <div class="filter-container">
+            <div class="filter-field">
+                <select id="departure-time">
+                    <option value="">Departure time</option>
+                    <option>08:00</option>
+                    <option>09:00</option>
+                    <option>10:00</option>
+                    <option>11:00</option>
+                    <option>12:00</option>
+                    <option>13:00</option>
+                    <option>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                    <option>17:00</option>
+                </select>
+            </div>
+
+            <div class="filter-field">
+                <select id="visitor-number">
+                    <option value="">Number of visitors</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Tabs 
+    <div class="nav-tabs">
+        <button class="active">Home</button>
+        <button onclick="goToSearch()">Search</button>
+    </div> -->
+
+    <!-- Castle Grid -->
+    <section class="castle-grid">
+        <div class="castle" id="alnwick">
+            <img src="images/AlnwickCastle.jpg" alt="Alnwick Castle - A historic site with grand architecture.">
+            <h3>Alnwick Castle</h3>
+            <p>Famous for its role in movies and medieval history.</p>
+            <button class="plan-btn" data-castle="alnwick">Plan Trip</button>
+        </div>
+
+        <div class="castle" id="auckland">
+            <img src="images/AucklandCastle.jpg" alt="Auckland Castle - A stunning medieval palace.">
+            <h3>Auckland Castle</h3>
+            <p>Known for its beautiful gardens and rich history.</p>
+            <button class="plan-btn" data-castle="auckland">Plan Trip</button>
+        </div>
+
+        <div class="castle" id="bamburgh">
+            <img src="images/BamburghCastle.jpg" alt="Bamburgh Castle - A coastal fortress with breathtaking views.">
+            <h3>Bamburgh Castle</h3>
+            <p>Overlooks the sea with a fascinating past.</p>
+            <button class="plan-btn" data-castle="bamburgh">Plan Trip</button>
+        </div>
+
+        <div class="castle" id="barnard">
+            <img src="images/BarnardCastle.jpg" alt="Barnard Castle - A scenic ruin with cultural significance.">
+            <h3>Barnard Castle</h3>
+            <p>Offers stunning landscapes and a historic feel.</p>
+            <button class="plan-btn" data-castle="barnard">Plan Trip</button>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('.plan-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const selectedCastle = this.getAttribute('data-castle');
+                const departureTime = document.getElementById('departure-time').value;
+                const visitorNumber = document.getElementById('visitor-number').value;
+
+                if (!departureTime || !visitorNumber) {
+                    alert("Please select departure time and number of visitors.");
+                    return;
+                }
+
+                // 将选择存储在本地存储中
+                localStorage.setItem('selectedCastle', selectedCastle);
+                localStorage.setItem('departureTime', departureTime);
+                localStorage.setItem('visitorNumber', visitorNumber);
+
+                // 跳转到确认页面
+                window.location.href = `itinerary.html?castle=${selectedCastle}&time=${departureTime}&visitors=${visitorNumber}`;
+            });
+        });
+    </script>
+
+    <script src="HomePage.js" defer></script>
+
+</body>
+
+</html>
