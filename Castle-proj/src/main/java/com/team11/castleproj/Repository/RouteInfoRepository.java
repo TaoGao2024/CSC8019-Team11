@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface RouteInfoRepository extends JpaRepository<RouteInfo, String> {
     @Query("SELECT r FROM RouteInfo r WHERE r.castleId=:castleId AND r.castleDirection = true")

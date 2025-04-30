@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-EN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itinerary Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            background-image: url('/images/background.jpg');
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+
+            font-size: 20px;
+        }
+
+        header {
+            background-color: rgba(4, 58, 6, 0.8);
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        section {
+            max-width: 800px;
+
+            margin: 0 auto;
+
+            padding: 20px;
+        }
+
+        .trip-overview,
+        .payment-form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+        }
+
+        .payment-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .payment-form input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .confirm-button {
+            background-color: rgba(4, 58, 6, 0.8);
+            color: black;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .confirm-button:hover {
+            background-color: rgba(4, 58, 6, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Itinerary Confirmation</h1>
+    </header>
+
+    <section>
+
+        <div class="trip-overview">
+            <h2>Itinerary overview</h2>
+
+            <div class="info-item">
+                <p><strong>Castle chosen:</strong> <span id="selected-castle"></span></p>
+            </div>
+            <div class="info-item">
+                <p><strong>Departure time:</strong> <span id="departure-time"></span></p>
+            </div>
+            <div class="info-item">
+                <p><strong>Return time：</strong> <span id="return-time"></span></p>
+            </div>
+            <div class="info-item">
+                <p><strong>Number of travelers:</strong> <span id="number-of-people"></span></p>
+            </div>
+            <div class="info-item">
+                <p><strong>Total Cost:</strong> <span id="total-cost"></span></p>
+            </div>
+
+
+            <form class="payment-form">
+
+                <h2>payment information</h2>
+
+                <div class="form-group">
+                    <label for="card-number">card number:</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="Please enter your card number">
+                </div>
+
+                <div class="form-group">
+                    <label for="expiry-date">expiry-date:</label>
+                    <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+                </div>
+
+                <div class="form-group">
+                    <label for="cvv">Security Code:</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="Please enter your security code">
+                </div>
+
+                <button type="submit" class="confirm-button">Confirm Payment:</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="confirmation.js"></script>
+</body>
+
+</html>

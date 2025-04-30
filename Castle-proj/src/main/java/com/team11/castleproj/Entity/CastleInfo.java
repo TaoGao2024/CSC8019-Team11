@@ -21,7 +21,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="CASTLEINFO")
+@Table(name="CastleInfo")
 public class CastleInfo {
     @Id
     @Column(name = "CASTLEID")

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -30,25 +29,20 @@ public class HomeController {
         this.routeInfoRepository = routeInfoRepository;
     }
 
-    @GetMapping("/")
-    public String home(){
-        return "index.html";
+    @GetMapping("/home")
+    public String homePage() {
+        return "HomePage";
     }
 
-    @GetMapping("/itinerary")
-    public String itinerary(){
-        return "output.html";
-    }
+//    @GetMapping("/itinerary")
+//    public String itinerary(){
+//        return "itinerary";
+//    }
 
     @GetMapping("/castle")
     public String getCastleDetail(@RequestParam("name") String name, Model model) {
         List<CastleInfo> result = castleInfoRepository.findByName(name);
-//        System.out.println(result.get(0).getCastleId());
-//        result.ifPresentOrElse(
-//                castle-> model.addAttribute("castle",castle),
-//                () -> model.addAttribute("error", "Castle not found")
-//        );
-        return "castle_detail.html";
+        return "castle.html";
     }
 
     @GetMapping("/routes")
@@ -72,7 +66,7 @@ public class HomeController {
     }
 
 
-    @GetMapping("/schedules")
+    @GetMapping("/itinerary")
     public String selectSchedule(@RequestParam("departTime")LocalTime departTime,
                                  @RequestParam("returnTime")LocalTime returnTime,
                                  @RequestParam("castleName")String castleName,
@@ -106,7 +100,7 @@ public class HomeController {
         System.out.println(roundTripList);
         System.out.println(totalPriceList);
         model.addAttribute("roundTripList",roundTripList);
-        return "schedules.html";
+        return "itinerary";
     }
 
 

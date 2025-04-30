@@ -32,8 +32,8 @@ CREATE TABLE RouteStop (
 CREATE TABLE ScheduleInfo (
   scheduleId VARCHAR(4) PRIMARY KEY,
   routeId VARCHAR(4) NOT NULL,
-  departTime VARCHAR(5) NOT NULL,
-  arriveTime VARCHAR(5) NOT NULL
+  departTime TIME NOT NULL,
+  arriveTime TIME NOT NULL
 );
 CREATE TABLE StopInfo (
   stopId VARCHAR(4) PRIMARY KEY,

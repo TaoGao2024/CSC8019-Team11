@@ -20,6 +20,7 @@ import java.time.LocalTime;
 @Table(name="ScheduleInfo")
 public class ScheduleInfo {
     @Id
+    @Column
     private String scheduleId;
     @Column(nullable = false)
     private String routeId;
