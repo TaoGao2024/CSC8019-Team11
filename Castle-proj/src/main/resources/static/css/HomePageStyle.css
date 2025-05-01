@@ -180,6 +180,23 @@ body {
   padding-bottom: 20px;
 }
 
+.castle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 3;
+}
+.castle img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+    transition: filter 0.3s ease;
+}
+
+.castle:hover img {
+    filter: brightness(0.75);
+}
 
 .castle img {
   width: 100%;
@@ -312,7 +329,9 @@ body {
 }
 
 .submit-btn:hover {
-  background-color: rgba(4, 58, 6, 1);
+    background-color: rgba(4, 58, 6, 1);
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 
