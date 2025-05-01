@@ -36,3 +36,6 @@ Thumbs.db
 Castle-proj/data/castledb.mv.db
 Castles/data/castledb.mv.db
 Castle-proj/data/castledb.trace.db
+
+*.db
+*.trace.db
