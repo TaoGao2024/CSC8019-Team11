@@ -113,14 +113,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 document.querySelectorAll('.info-btn').forEach(button => {
   button.addEventListener('click', function () {
-    const selectedCastleKey = this.getAttribute('data-castle');
-    const castleNameMap = {
-      alnwick: "Alnwick Castle",
-      auckland: "Auckland Castle",
-      bamburgh: "Bamburgh Castle",
-      barnard: "Barnard Castle"
-    };
-    const selectedCastleName = castleNameMap[selectedCastleKey];
+    const selectedCastleName = this.getAttribute('data-castle');
+    // const castleNameMap = {
+    //   alnwick: "Alnwick Castle",
+    //   auckland: "Auckland Castle",
+    //   bamburgh: "Bamburgh Castle",
+    //   barnard: "Barnard Castle"
+    // };
+    // const selectedCastleName = castleNameMap[selectedCastleKey];
     if (selectedCastleName) {
       window.location.href = `/castle?name=${encodeURIComponent(selectedCastleName)}`;
     } else {

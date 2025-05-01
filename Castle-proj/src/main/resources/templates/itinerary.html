@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Your Itinerary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/itinerary.css">
+  <link rel="stylesheet" href="/css/castle.css">
 </head>
 
 <body>
@@ -44,23 +44,21 @@
   <script src="/js/itinerary.js"></script>
 </body>
 <script>
-  // 获取URL参数
   const urlParams = new URLSearchParams(window.location.search);
   const selectedCastle = urlParams.get('castle');
   const departureTime = urlParams.get('time');
   const returnTime = urlParams.get('return');
   const visitorNumber = urlParams.get('visitors');
 
-  // 检查是否获取到参数
+
   console.log(selectedCastle, departureTime, returnTime, visitorNumber);
 
-  // 使用这些参数更新页面内容
+
   document.getElementById('castle-name').textContent = selectedCastle.charAt(0).toUpperCase() + selectedCastle.slice(1);
   document.getElementById('departure-time').textContent = departureTime;
   document.getElementById('return-time').textContent = returnTime;
   document.getElementById('visitor-count').textContent = visitorNumber;
 
-  // 更新确认链接
   const confirmLink = document.getElementById('confirm-link');
   confirmLink.href = `/confirmation?castle=${selectedCastle}&time=${departureTime}&return=${returnTime}&visitors=${visitorNumber}`;
 </script>

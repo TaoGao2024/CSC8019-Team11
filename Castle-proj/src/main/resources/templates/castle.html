@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Castle Information</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="itinerary.css">
+  <link rel="stylesheet" href="castle.css">
   <style>
    body {
     margin: 0;
@@ -71,14 +71,14 @@
 
   </style>
 </head>
+
 <body>
-  
 
   <header class="page-header">
    <div class="header-bar">
-   <a href="/" class="back-button">← Back</a>
-    <h1>Welcome to <span id="castle-name">Castle Name</span></h1>
-      </div>
+     <a href="/" class="back-button">← Back</a>
+     <h1 th:text="${'Welcome to ' + castleName}"></h1>
+    </div>
   </header>
 
   <main class="page-content">
@@ -87,6 +87,13 @@
       <p><strong>Official Website:</strong> <a id="castle-link" href="#" target="_blank">Visit Site</a></p>
       <h4>Highlights:</h4>
       <ul id="castle-highlights"></ul>
+    </section>
+    <section class="info-card">
+      <p th:text="${castleInfo.description}">Castle description will appear here.</p>
+      <p>
+        <strong>Entry Fee:</strong> £<span th:text="${castleInfo.entryFee}">0.00</span>
+      </p>
+
     </section>
   </main>
 

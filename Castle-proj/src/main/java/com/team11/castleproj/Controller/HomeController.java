@@ -42,6 +42,10 @@ public class HomeController {
     @GetMapping("/castle")
     public String getCastleDetail(@RequestParam("name") String name, Model model) {
         List<CastleInfo> result = castleInfoRepository.findByName(name);
+        System.out.println(result);
+        String castleName = result.get(0).getName();
+        model.addAttribute("castleInfo", result.get(0));
+        model.addAttribute("castleName", castleName.substring(0,1).toUpperCase() + castleName.substring(1));
         return "castle.html";
     }
 
