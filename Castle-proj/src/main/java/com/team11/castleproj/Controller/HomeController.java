@@ -29,7 +29,7 @@ public class HomeController {
         this.routeInfoRepository = routeInfoRepository;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String homePage() {
         return "HomePage";
     }
@@ -83,7 +83,6 @@ public class HomeController {
         List<Double> totalPriceList = new ArrayList<>();
 
         for(ScheduleInfo outbound : outboundSchedules){
-
             List<ScheduleInfo> returnOptions = scheduleInfoRepository.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
             for(ScheduleInfo returnOption : returnOptions){
                 if(outbound.getArriveTime().plusHours(2).isBefore(returnOption.getDepartTime())){
@@ -98,11 +97,17 @@ public class HomeController {
                 }
             }
         }
-        System.out.println(roundTripList);
-        System.out.println(totalPriceList);
-        model.addAttribute("roundTripList",roundTripList);
-        return "itinerary";
+
+        if(roundTripList.isEmpty()){
+            return "error.html";
+        }
+        else{
+            System.out.println(roundTripList);
+            System.out.println(roundTripList.get(0).getOutboundSchedule());
+            System.out.println(roundTripList.get(0).getReturnSchedule());
+            System.out.println(totalPriceList);
+            model.addAttribute("roundTripList",roundTripList);
+            return "routeSelection.html";
+        }
     }
-
-
 }

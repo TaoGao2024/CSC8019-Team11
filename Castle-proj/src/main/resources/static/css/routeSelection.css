@@ -1,0 +1,34 @@
+.trip-section {
+    background-color: #f9f9f9; /* White background for trip sections */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: 10px 0; /* Spacing between trip sections */
+    border: 2px solid #545454;
+}
+
+/* Departure and Return Trip Headers */
+.trip-section h3 {
+    color: #333; /* Bootstrap primary color */
+    margin-top: 10px;
+    margin-bottom: 5px; /* Spacing for headings */
+}
+
+/* Styling the Price */
+.price {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.trip-section p {
+    color: #666;
+    margin: 5px 0;
+}
+
+/* No Itineraries Found Message */
+.trip-section p.no-itineraries {
+    color: #d9534f;
+    font-weight: bold;
+    text-align: center;
+}

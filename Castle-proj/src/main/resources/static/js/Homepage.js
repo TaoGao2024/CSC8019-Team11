@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const dropdown = document.getElementById("dropdown");
   const logoutBtn = document.getElementById("logout-btn");
   const signInOption = document.getElementById("sign-in-option");
-  const accountLink = document.getElementById("account-link");
   const authOnlyElements = document.querySelectorAll(".auth-only");
 
   if (loggedInUser) {
@@ -64,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   } else {
-    // User doesnot login -> sign in button
+    // User does not login -> sign in button
     if (signInOption) signInOption.classList.remove("hidden");
     authOnlyElements.forEach(el => el.classList.add("hidden"));
   }
@@ -104,6 +103,10 @@ document.addEventListener("DOMContentLoaded", function () {
         castleName: selectedCastle,
         noOfVisitors: visitorNumber
       });
+      console.log(departureTime);
+      console.log(returnTime);
+      console.log(selectedCastle)
+      console.log(visitorNumber)
 
       window.location.href = `/itinerary?${params.toString()}`;
     });

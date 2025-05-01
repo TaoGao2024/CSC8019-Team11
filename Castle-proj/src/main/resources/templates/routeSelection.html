@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/routeSelection.css"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Itinerary</h1>
+
+<div th:if="${#lists.isEmpty(roundTripList)}" class="trip-section">
+    <p>No itineraries found.</p>
+</div>
+<div th:unless="${#lists.isEmpty(roundTripList)}" th:each="trip : ${roundTripList}" class="trip-section">
+    <h3>Departure Trip</h3>
+    <p th:text="'Depart at: ' + ${trip.outboundSchedule?.departTime}"></p>
+    <p th:text="'Arrive at: ' + ${trip.outboundSchedule?.arriveTime}"></p>
+
+    <h3>Return Trip</h3>
+    <p th:text="'Return at: ' + ${trip.returnSchedule?.departTime}"></p>
+    <p th:text="'Arrive at: ' + ${trip.returnSchedule?.arriveTime}"></p>
+
+    <h3 class="price">Total Price: <span th:text="${trip?.getTotalPrice() != null ? trip.getTotalPrice() : 'N/A'}"></span></h3>
+</div>
+</body>
+</html>

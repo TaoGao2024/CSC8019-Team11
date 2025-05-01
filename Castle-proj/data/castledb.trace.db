@@ -59,3 +59,6 @@ select si1_0.schedule_id,si1_0.arrive_time,si1_0.depart_time,si1_0.route_id from
 2025-04-30 18:39:35.183239+01:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CASTLE_INFO" not found; SQL statement:
 select ci1_0.castleid,ci1_0.description,ci1_0.entryfee,ci1_0.name from castle_info ci1_0 where ci1_0.name=? [42102-232]
+2025-05-01 10:48:30.008109+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM CASTLEINFO ROUTEINFO [*]SCHEDULEINFO"; SQL statement:
+SELECT * FROM CASTLEINFO ROUTEINFO SCHEDULEINFO [42000-232]
