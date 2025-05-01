@@ -1,33 +1,38 @@
 HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+.apt_generated/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
 .vscode/
+
+target/
+!.mvn/wrapper/maven-wrapper.properties   # keep Maven wrapper config
+!.mvn/wrapper/maven-wrapper.jar         # keep Maven wrapper
+mvnw
+mvnw.cmd
+
+.DS_Store
+Thumbs.db
+
+*.log
+
+# Database files
+Castle-proj/data/castledb.mv.db
+Castles/data/castledb.mv.db
+Castle-proj/data/castledb.trace.db
