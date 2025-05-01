@@ -29,6 +29,7 @@ public class RoundTripDTO {
         this.returnSchedule = returnSchedule;
     }
 
+
     public double getTotalPrice() {
         double outboundPrice = outboundSchedule.getRoute().getPrice();
         double returnPrice = returnSchedule.getRoute().getPrice();
