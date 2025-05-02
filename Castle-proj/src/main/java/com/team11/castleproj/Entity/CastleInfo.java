@@ -19,6 +19,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.LocalTime;
+
 @Data
 @Entity
 @Table(name="CastleInfo")
@@ -32,4 +34,8 @@ public class CastleInfo {
     private String description;
     @Column(name = "ENTRYFEE")
     private double entryFee;
+    @Column(name = "OPENTIME")
+    private LocalTime openTime;
+    @Column(name = "ClOSETIME")
+    private LocalTime closeTime;
 }

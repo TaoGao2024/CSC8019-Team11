@@ -5,9 +5,7 @@ import com.team11.castleproj.Entity.ScheduleInfo;
 public class RoundTripDTO {
     private ScheduleInfo outboundSchedule;
     private ScheduleInfo returnSchedule;
-
-    public RoundTripDTO(){
-    }
+    private double totalPrice;
 
     public RoundTripDTO(ScheduleInfo outboundSchedule, ScheduleInfo returnSchedule) {
         this.outboundSchedule = outboundSchedule;
@@ -17,22 +15,17 @@ public class RoundTripDTO {
     public ScheduleInfo getOutboundSchedule() {
         return outboundSchedule;
     }
-    public void setOutboundSchedule(ScheduleInfo outboundSchedule) {
-        this.outboundSchedule = outboundSchedule;
-    }
 
     public ScheduleInfo getReturnSchedule() {
         return returnSchedule;
     }
 
-    public void setReturnSchedule(ScheduleInfo returnSchedule) {
-        this.returnSchedule = returnSchedule;
-    }
-
-
-    public double getTotalPrice() {
+    public void setTotalPrice(double entryFee, int noOfVisitors) {
         double outboundPrice = outboundSchedule.getRoute().getPrice();
         double returnPrice = returnSchedule.getRoute().getPrice();
-        return outboundPrice + returnPrice;
+        totalPrice = (outboundPrice + returnPrice + entryFee) * noOfVisitors;
+    }
+    public double getTotalPrice() {
+        return totalPrice;
     }
 }

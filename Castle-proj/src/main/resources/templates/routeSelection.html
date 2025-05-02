@@ -20,7 +20,7 @@
     <p th:text="'Return at: ' + ${trip.returnSchedule?.departTime}"></p>
     <p th:text="'Arrive at: ' + ${trip.returnSchedule?.arriveTime}"></p>
 
-    <h3 class="price">Total Price: <span th:text="${trip?.getTotalPrice() != null ? trip.getTotalPrice() : 'N/A'}"></span></h3>
+    <h3 class="price">Total Price: £<span th:text="${trip?.getTotalPrice()}"></span></h3>
 </div>
 </body>
 </html>
