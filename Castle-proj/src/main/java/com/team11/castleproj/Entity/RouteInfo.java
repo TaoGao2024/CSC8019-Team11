@@ -28,6 +28,7 @@ public class RouteInfo {
 
     @Column(nullable = false)
     private String availability;
+    @Column(nullable = false)
     private boolean castleDirection;
     private int travelTime;
 }

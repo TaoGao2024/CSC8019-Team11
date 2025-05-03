@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(selectedCastle)
       console.log(visitorNumber)
 
-      window.location.href = `/itinerary?${params.toString()}`;
+      window.location.href = `/schedules?${params.toString()}`;
     });
   }
 document.querySelectorAll('.info-btn').forEach(button => {

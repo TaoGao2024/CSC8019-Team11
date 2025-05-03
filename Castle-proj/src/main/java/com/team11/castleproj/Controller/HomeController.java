@@ -23,7 +23,7 @@ public class HomeController {
     private final ScheduleInfoRepository scheduleInfoRepository;
 
     @Autowired
-    public HomeController(CastleInfoRepository castleInfoRepository, RouteInfoRepository routeInfoRepository,ScheduleInfoRepository scheduleInfoRepository) {
+    public HomeController(CastleInfoRepository castleInfoRepository, ScheduleInfoRepository scheduleInfoRepository) {
         this.castleInfoRepository = castleInfoRepository;
         this.scheduleInfoRepository = scheduleInfoRepository;
     }
@@ -35,59 +35,37 @@ public class HomeController {
 
     @GetMapping("/castle")
     public String getCastleDetail(@RequestParam("name") String name, Model model) {
-        List<CastleInfo> result = castleInfoRepository.findByName(name);
-        System.out.println(result);
-        String castleName = result.get(0).getName();
-        model.addAttribute("castleInfo", result.get(0));
+        CastleInfo castleInfo = castleInfoRepository.findByName(name);
+        String castleName = castleInfo.getName();
+        model.addAttribute("castleInfo", castleInfo);
         model.addAttribute("castleName", castleName.substring(0,1).toUpperCase() + castleName.substring(1));
         return "castle.html";
     }
 
-//    @GetMapping("/routes")
-//    public String getRoutes(@RequestParam("castleId")String castleId,@RequestParam("direction")boolean direction,Model model){
-//        if(direction){
-//            List<RouteInfo> results = routeInfoRepository.findDepartureRoutesByCastle(castleId);
-//            if (results.isEmpty()) {
-//                model.addAttribute("error", "No routes found");
-//            } else {
-//                model.addAttribute("routeList", results);
-//            }
-//        }else{
-//            List<RouteInfo> results = routeInfoRepository.findReturnRoutesByCastle(castleId);
-//            if (results.isEmpty()) {
-//                model.addAttribute("error", "No routes found");
-//            }else {
-//                model.addAttribute("routeList", results);
-//            }
-//        }
-//        return "routes.html";
-//    }
-
-
-    @GetMapping("/itinerary")
-    public String selectSchedule(@RequestParam("departTime")LocalTime departTime,
-                                 @RequestParam("returnTime")LocalTime returnTime,
-                                 @RequestParam("castleName")String castleName,
-                                 @RequestParam("noOfVisitors")int noOfVisitors,
+    @GetMapping("/schedules")
+    public String selectSchedule(@RequestParam("departTime") LocalTime departTime,
+                                 @RequestParam("returnTime") LocalTime returnTime,
+                                 @RequestParam("castleName") String castleName,
+                                 @RequestParam("noOfVisitors") int noOfVisitors,
                                  Model model) {
-        List<CastleInfo> castleInfoList = castleInfoRepository.findByName(castleName);
+        CastleInfo castleInfo = castleInfoRepository.findByName(castleName);
 
-        if (castleInfoList.isEmpty()){
+        if (castleInfo == null) {
             model.addAttribute("message", "No such castles found.");
             return "error";
         }
         
-        String castleId = castleInfoList.get(0).getCastleId();
-        double entryFee = castleInfoList.get(0).getEntryFee();
-        LocalTime closeTime = castleInfoList.get(0).getCloseTime();
+        String castleId = castleInfo.getCastleId();
+        double entryFee = castleInfo.getEntryFee();
+        LocalTime closeTime = castleInfo.getCloseTime();
 
-        List<ScheduleInfo> outboundSchedules = scheduleInfoRepository.findOutboundSchedules(departTime,departTime.plusHours(1),castleId);
+        List<ScheduleInfo> outboundSchedules = scheduleInfoRepository.findOutboundSchedules(departTime, departTime.plusHours(1), castleId);
 
         List<RoundTripDTO> roundTripList = new ArrayList<>();
 
         for(ScheduleInfo outbound : outboundSchedules){
-            List<ScheduleInfo> returnOptions = scheduleInfoRepository.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
-            for(ScheduleInfo returnOption : returnOptions){
+            List<ScheduleInfo> returnSchedules = scheduleInfoRepository.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
+            for(ScheduleInfo returnOption : returnSchedules){
                 LocalTime castleFinishTime = outbound.getArriveTime().plusHours(2);
                 if(castleFinishTime.isBefore(returnOption.getDepartTime()) && castleFinishTime.isBefore(closeTime)){
                     RoundTripDTO dto = new RoundTripDTO(outbound, returnOption);
@@ -102,10 +80,15 @@ public class HomeController {
             return "error";
         }
         else{
-            System.out.println(roundTripList.get(0).getOutboundSchedule());
-            System.out.println(roundTripList.get(0).getReturnSchedule());
             model.addAttribute("roundTripList", roundTripList);
             return "routeSelection";
         }
+    }
+
+    @GetMapping("/itinerary")
+    public String displayItinerary(@RequestParam("outboundId") String outboundId, @RequestParam("returnId") String returnId, Model model) {
+        System.out.println(outboundId);
+        model.addAttribute("message", "ID is " + outboundId + " and " + returnId);
+        return "error";
     }
 }

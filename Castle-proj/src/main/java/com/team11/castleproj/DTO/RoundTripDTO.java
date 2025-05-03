@@ -10,6 +10,7 @@ public class RoundTripDTO {
     public RoundTripDTO(ScheduleInfo outboundSchedule, ScheduleInfo returnSchedule) {
         this.outboundSchedule = outboundSchedule;
         this.returnSchedule = returnSchedule;
+        this.totalPrice = 0.0;
     }
 
     public ScheduleInfo getOutboundSchedule() {
@@ -25,6 +26,7 @@ public class RoundTripDTO {
         double returnPrice = returnSchedule.getRoute().getPrice();
         totalPrice = (outboundPrice + returnPrice + entryFee) * noOfVisitors;
     }
+
     public double getTotalPrice() {
         return totalPrice;
     }

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CastleInfoRepository extends JpaRepository<CastleInfo, Integer> {
     @Query("SELECT c FROM CastleInfo c WHERE c.name = :name")
-    List<CastleInfo> findByName(@Param("name") String name);
+    CastleInfo findByName(@Param("name") String name);
 
 
 }

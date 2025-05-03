@@ -6,21 +6,21 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Itinerary</h1>
+<h1>Select a Travel Option</h1>
 
-<div th:if="${#lists.isEmpty(roundTripList)}" class="trip-section">
-    <p>No itineraries found.</p>
-</div>
-<div th:unless="${#lists.isEmpty(roundTripList)}" th:each="trip : ${roundTripList}" class="trip-section">
+
+<div th:each="trip : ${roundTripList}" class="trip-section">
     <h3>Departure Trip</h3>
-    <p th:text="'Depart at: ' + ${trip.outboundSchedule?.departTime}"></p>
-    <p th:text="'Arrive at: ' + ${trip.outboundSchedule?.arriveTime}"></p>
+    <p th:text="'Depart at: ' + ${trip.outboundSchedule.departTime}"></p>
+    <p th:text="'Arrive at: ' + ${trip.outboundSchedule.arriveTime}"></p>
 
     <h3>Return Trip</h3>
-    <p th:text="'Return at: ' + ${trip.returnSchedule?.departTime}"></p>
-    <p th:text="'Arrive at: ' + ${trip.returnSchedule?.arriveTime}"></p>
+    <p th:text="'Return at: ' + ${trip.returnSchedule.departTime}"></p>
+    <p th:text="'Arrive at: ' + ${trip.returnSchedule.arriveTime}"></p>
 
-    <h3 class="price">Total Price: £<span th:text="${trip?.getTotalPrice()}"></span></h3>
+    <h3 class="price">Total Price: £<span th:text="${trip.getTotalPrice()}"></span></h3>
+    <h3 class="price">Schedule ID <span th:text="${trip.returnSchedule.scheduleId}"></span></h3>
+    <a th:href="@{/itinerary(outboundId=${trip.outboundSchedule.scheduleId}, returnId=${trip.returnSchedule.scheduleId})}">View Details</a>
 </div>
 </body>
 </html>
