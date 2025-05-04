@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/css/routeSelection.css"/>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Castle Trip Planner - Routes</title>
 </head>
 <body>
 <h1>Select a Travel Option</h1>
@@ -19,7 +19,6 @@
     <p th:text="'Arrive at: ' + ${trip.returnSchedule.arriveTime}"></p>
 
     <h3 class="price">Total Price: £<span th:text="${trip.getTotalPrice()}"></span></h3>
-    <h3 class="price">Schedule ID <span th:text="${trip.returnSchedule.scheduleId}"></span></h3>
     <a th:href="@{/itinerary(outboundId=${trip.outboundSchedule.scheduleId}, returnId=${trip.returnSchedule.scheduleId})}">View Details</a>
 </div>
 </body>

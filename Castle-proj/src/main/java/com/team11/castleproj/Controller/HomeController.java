@@ -1,5 +1,7 @@
 package com.team11.castleproj.Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team11.castleproj.DTO.RoundTripDTO;
 import com.team11.castleproj.Entity.CastleInfo;
 import com.team11.castleproj.Entity.RouteInfo;
@@ -47,7 +49,7 @@ public class HomeController {
                                  @RequestParam("returnTime") LocalTime returnTime,
                                  @RequestParam("castleName") String castleName,
                                  @RequestParam("noOfVisitors") int noOfVisitors,
-                                 Model model) {
+                                 Model model) throws JsonProcessingException {
         CastleInfo castleInfo = castleInfoRepository.findByName(castleName);
 
         if (castleInfo == null) {
