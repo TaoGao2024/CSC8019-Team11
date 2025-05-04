@@ -1,18 +1,36 @@
+/*
+ * Creation Date: Mar 26, 2025
+ * Class for controller to handle incoming requests
+ * and rendering templates including the home page,
+ * round trip or route selection, and itinerary
+ * output.
+ *
+ * @author Samuel Leung
+ * @version 3.1
+ *
+ * Modification history:
+ * 5/4 Samuel Leung - Added sample queries to castle
+ * 27/4 Tao Gao - Added routes and castle detail endpoint
+ * 29/4 Samuel Leung & Tao Gao - Applied queries and algorithm for fetching
+ * round trips in schedules endpoint
+ * 30/4 Samuel Leung - Update castle detail endpoint
+ * 2/5 Samuel Leung - Update algorithm to check for castle opening times;
+ * add error and no routes found page
+ * 4/5 Samuel Leung - Add Itinerary endpoint
+ */
 package com.team11.castleproj.Controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.team11.castleproj.DTO.RoundTripDTO;
 import com.team11.castleproj.Entity.CastleInfo;
-import com.team11.castleproj.Entity.RouteInfo;
+import com.team11.castleproj.Entity.RouteStop;
 import com.team11.castleproj.Entity.ScheduleInfo;
 import com.team11.castleproj.Repository.CastleInfoRepository;
-import com.team11.castleproj.Repository.RouteInfoRepository;
+import com.team11.castleproj.Repository.RouteStopRepository;
 import com.team11.castleproj.Repository.ScheduleInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.RouteMatcher;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
@@ -23,11 +41,13 @@ import java.util.List;
 public class HomeController {
     private final CastleInfoRepository castleInfoRepository;
     private final ScheduleInfoRepository scheduleInfoRepository;
+    private final RouteStopRepository routeStopRepository;
 
     @Autowired
-    public HomeController(CastleInfoRepository castleInfoRepository, ScheduleInfoRepository scheduleInfoRepository) {
+    public HomeController(CastleInfoRepository castleInfoRepository, ScheduleInfoRepository scheduleInfoRepository, RouteStopRepository routeStopRepository) {
         this.castleInfoRepository = castleInfoRepository;
         this.scheduleInfoRepository = scheduleInfoRepository;
+        this.routeStopRepository = routeStopRepository;
     }
 
     @GetMapping("/")
@@ -49,7 +69,7 @@ public class HomeController {
                                  @RequestParam("returnTime") LocalTime returnTime,
                                  @RequestParam("castleName") String castleName,
                                  @RequestParam("noOfVisitors") int noOfVisitors,
-                                 Model model) throws JsonProcessingException {
+                                 Model model) {
         CastleInfo castleInfo = castleInfoRepository.findByName(castleName);
 
         if (castleInfo == null) {
@@ -64,13 +84,24 @@ public class HomeController {
         List<ScheduleInfo> outboundSchedules = scheduleInfoRepository.findOutboundSchedules(departTime, departTime.plusHours(1), castleId);
 
         List<RoundTripDTO> roundTripList = new ArrayList<>();
+        List<RouteStop> outboundTransfers, returnTransfers;
 
         for(ScheduleInfo outbound : outboundSchedules){
             List<ScheduleInfo> returnSchedules = scheduleInfoRepository.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
             for(ScheduleInfo returnOption : returnSchedules){
                 LocalTime castleFinishTime = outbound.getArriveTime().plusHours(2);
                 if(castleFinishTime.isBefore(returnOption.getDepartTime()) && castleFinishTime.isBefore(closeTime)){
-                    RoundTripDTO dto = new RoundTripDTO(outbound, returnOption);
+                    List<RouteStop> outboundStops = routeStopRepository.findRouteStopsByRouteId(outbound.getRouteId());
+                    List<RouteStop> returnStops = routeStopRepository.findRouteStopsByRouteId(returnOption.getRouteId());
+                    if(outboundStops.isEmpty() || returnStops.isEmpty()){
+                        model.addAttribute("message", "Stops missing.");
+                        return "error";
+                    }
+//                    if (outboundStops.size() > 2)
+//                        outboundTransfers = outboundStops.subList(1, outboundStops.size());
+//                    if (returnStops.size() > 2)
+//                        returnTransfers = outboundStops.subList(1, returnStops.size());
+                    RoundTripDTO dto = new RoundTripDTO(outbound, returnOption, outboundStops, returnStops);
                     dto.setTotalPrice(entryFee, noOfVisitors);
                     roundTripList.add(dto);
                 }

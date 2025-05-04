@@ -7,13 +7,12 @@
  * @author Samuel Leung
  * @version 1.0
  *
+ * Modification history:
+ * 4/5 Samuel Leung - Added joined columns for stop information
  */
 package com.team11.castleproj.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -26,5 +25,9 @@ public class RouteStop {
 
     @Column(nullable = true)
     private String busService;
+
+    @ManyToOne
+    @JoinColumn(name = "stopId", referencedColumnName = "stopId", insertable = false, updatable = false)
+    private StopInfo stopInfo;
 
 }
