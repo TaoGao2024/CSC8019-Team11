@@ -2,7 +2,7 @@
 const itineraries = {
   "alnwick": {
     "name": "Alnwick Castle",
-    "image": "images/AlnwickCastle.jpg",
+    "image": "images/Alnwick.jpg",
     "busPrice": 2.5,
     "ticketPrice": 1,
     "baseDeparture": "15:30",
@@ -30,7 +30,7 @@ const itineraries = {
   },
   "barnard": {
     "name": "Barnard Castle",
-    "image": "images/BarnardCastle.jpg",
+    "image": "images/Barnard.jpg",
     "busPrice": 3,
     "ticketPrice": 1,
     "baseDeparture": "14:00",
@@ -55,7 +55,7 @@ const itineraries = {
   },
   "bamburgh": {
     "name": "Bamburgh Castle",
-    "image": "images/BamburghCastle.jpg",
+    "image": "images/Bamburgh.jpg",
     "busPrice": 3.2,
     "ticketPrice": 1.5,
     "baseDeparture": "13:30",
@@ -78,7 +78,7 @@ const itineraries = {
   },
   "auckland": {
     "name": "Auckland Castle",
-    "image": "images/AucklandCastle.jpg",
+    "image": "images/Auckland.jpg",
     "busPrice": 2.8,
     "ticketPrice": 2,
     "baseDeparture": "14:30",

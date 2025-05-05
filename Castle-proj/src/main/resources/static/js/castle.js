@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const castleData = {
     alnwick: {
       name: "Alnwick Castle",
-       image: "images/AlnwickCastle.jpg",
+       image: "images/Alnwick.jpg",
       description: "Alnwick Castle is one of the largest inhabited castles in England and featured in the Harry Potter films.",
       website: "https://www.alnwickcastle.com/",
       highlights: [
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     auckland: {
       name: "Auckland Castle",
-        image: "images/AucklandCastle.jpg",
+        image: "images/Auckland.jpg",
       description: "Auckland Castle is a historic palace with beautiful gardens, part of The Auckland Project.",
       website: "https://aucklandproject.org/attraction/auckland-palace/",
       highlights: [
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     bamburgh: {
       name: "Bamburgh Castle",
-        image: "images/BamburghCastle.jpg",
+        image: "images/Bamburgh.jpg",
       description: "Bamburgh Castle is a coastal fortress offering panoramic sea views and rich historical artifacts.",
       website: "https://www.bamburghcastle.com/",
       highlights: [
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     barnard: {
       name: "Barnard Castle",
-        image: "images/BarnardCastle.jpg",
+        image: "images/Barnard.jpg",
       description: "Barnard Castle is a scenic ruin located on a cliff above the River Tees, perfect for history lovers.",
       website: "https://www.english-heritage.org.uk/visit/places/barnard-castle/",
       highlights: [

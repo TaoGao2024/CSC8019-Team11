@@ -12,6 +12,9 @@ public interface ScheduleInfoRepository extends JpaRepository<ScheduleInfo, Inte
     @Query("SELECT s FROM ScheduleInfo s WHERE s.routeId = :routeId")
     List<ScheduleInfo> findByRouteId(@Param("routeId") String routeId);
 
+    @Query("SELECT s FROM ScheduleInfo s WHERE s.scheduleId = :scheduleId")
+    ScheduleInfo findByScheduleId(@Param("scheduleId") String scheduleId);
+
     @Query("SELECT s FROM ScheduleInfo s " +
             "WHERE s.route.castleDirection = true " +
             "AND s.route.castleId = :castleId " +

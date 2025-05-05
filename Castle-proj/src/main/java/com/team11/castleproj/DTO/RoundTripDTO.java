@@ -35,10 +35,14 @@ public class RoundTripDTO {
         return returnStops;
     }
 
-    public void setTotalPrice(double entryFee, int noOfVisitors) {
+    public void calcTotalPrice(double entryFee, int noOfVisitors) {
         double outboundPrice = outboundSchedule.getRoute().getPrice();
         double returnPrice = returnSchedule.getRoute().getPrice();
         totalPrice = (outboundPrice + returnPrice + entryFee) * noOfVisitors;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public double getTotalPrice() {

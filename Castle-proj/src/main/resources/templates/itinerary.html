@@ -5,62 +5,40 @@
   <meta charset="UTF-8">
   <title>Your Itinerary</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/castle.css">
+  <link rel="stylesheet" href="/css/itinerary.css">
 </head>
 
 <body>
   <header class="page-header" id="page-header">
-    <h1>Your Itinerary for <span id="castle-name">Castle Name</span></h1>
+    <h1>Welcome to <span th:text="${castleName}"></span></h1>
   </header>
 
   <main class="page-content">
-    <section class="info-card">
-      <img id="castle-image" class="castle-img hidden" src="" alt="">
-      <p><strong>Price: <span id="castle-price">--</span></strong></p>
-      <p><strong>Number of visitors:</strong> <span id="visitor-count">--</span></p>
+    <button>Download Itinerary</button>
+    <div th:text="${castleInfo.description}"></div>
+    <div th:text="${noOfVisitors} + ' visitors'"></div>
+    <img th:src="@{'/images/' + ${castleName} + '.jpg'}" th:alt="'A photo of' + ${castleName}">
 
-      <p><strong>Bus departure time:</strong> <span id="departure-time">--</span></p>
-      <p><strong>Bus return time:</strong> <span id="return-time">--</span></p>
+    <h3>Departure Trip</h3>
+    <ul>
+      <li th:each="stop : ${trip.outboundStops}">
+        <span th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> via <span th:text="${stop.busService}"></span> at <span th:text="${trip.outboundSchedule.departTime}"></span></span>
+        <span th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.outboundStops.size()}">Transfer to <span th:text="${stop.busService}"></span> from <span th:text="${stop.stopInfo.name}"></span></span>
+        <span th:if="${stop.sequenceNum} == ${trip.outboundStops.size()}">Arrive to <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.outboundSchedule.arriveTime}"></span></span>
+      </li>
+    </ul>
+    <h3>Return Trip</h3>
+    <ul>
+      <li th:each="stop : ${trip.returnStops}">
+        <span th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> via <span th:text="${stop.busService}"></span> at <span th:text="${trip.returnSchedule.departTime}"></span></span>
+        <span th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.returnStops.size()}">Transfer to <span th:text="${stop.busService}"></span> at <span th:text="${stop.stopInfo.name}"></span></span>
+        <span th:if="${stop.sequenceNum} == ${trip.returnStops.size()}">Arrive to <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.returnSchedule.arriveTime}"></span></span>
+      </li>
+    </ul>
 
-      <h4>OUTBOUND JOURNEY:</h4>
-      <ul id="outbound-journey"></ul>
-
-      <h4>Walking directions to castle:</h4>
-      <ul id="walking-directions"></ul>
-
-      <h4>RETURN JOURNEY to Newcastle:</h4>
-      <ul id="return-journey"></ul>
-
-      <h4>Useful Tips:</h4>
-      <ul id="tips"></ul>
-
-      <div style="text-align: center; margin-top: 30px;">
-        <a id="confirm-link" href="#"
-          class="confirm-button">Confirm Payment</a>
-      </div>
-    </section>
+    <h3 class="trip-price">Total Price: £<span th:text="${trip.totalPrice}"></span></h3>
   </main>
 
-  <script src="/js/itinerary.js"></script>
+<!--  <script src="/js/itinerary.js"></script>-->
 </body>
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const selectedCastle = urlParams.get('castle');
-  const departureTime = urlParams.get('time');
-  const returnTime = urlParams.get('return');
-  const visitorNumber = urlParams.get('visitors');
-
-
-  console.log(selectedCastle, departureTime, returnTime, visitorNumber);
-
-
-  document.getElementById('castle-name').textContent = selectedCastle.charAt(0).toUpperCase() + selectedCastle.slice(1);
-  document.getElementById('departure-time').textContent = departureTime;
-  document.getElementById('return-time').textContent = returnTime;
-  document.getElementById('visitor-count').textContent = visitorNumber;
-
-  const confirmLink = document.getElementById('confirm-link');
-  confirmLink.href = `/confirmation?castle=${selectedCastle}&time=${departureTime}&return=${returnTime}&visitors=${visitorNumber}`;
-</script>
-
 </html>
