@@ -20,7 +20,6 @@
  */
 package com.team11.castleproj.Controller;
 
-import com.team11.castleproj.DTO.ItineraryDTO;
 import com.team11.castleproj.DTO.RoundTripDTO;
 import com.team11.castleproj.Entity.CastleInfo;
 import com.team11.castleproj.Entity.RouteStop;
@@ -39,15 +38,17 @@ import java.util.List;
 
 @Controller
 public class HomeController {
-    private final CastleInfoRepository castleInfoRepository;
-    private final ScheduleInfoRepository scheduleInfoRepository;
-    private final RouteStopRepository routeStopRepository;
+    private final CastleInfoRepository castleRepo;
+    private final ScheduleInfoRepository scheduleRepo;
+    private final RouteStopRepository routeStopRepo;
 
     @Autowired
-    public HomeController(CastleInfoRepository castleInfoRepository, ScheduleInfoRepository scheduleInfoRepository, RouteStopRepository routeStopRepository) {
-        this.castleInfoRepository = castleInfoRepository;
-        this.scheduleInfoRepository = scheduleInfoRepository;
-        this.routeStopRepository = routeStopRepository;
+    public HomeController(CastleInfoRepository castleRepo,
+                          ScheduleInfoRepository scheduleRepo,
+                          RouteStopRepository routeStopRepo) {
+        this.castleRepo = castleRepo;
+        this.scheduleRepo = scheduleRepo;
+        this.routeStopRepo = routeStopRepo;
     }
 
     @GetMapping("/")
@@ -57,10 +58,11 @@ public class HomeController {
 
     @GetMapping("/castle")
     public String getCastleDetail(@RequestParam("name") String name, Model model) {
-        CastleInfo castleInfo = castleInfoRepository.findByName(name);
+        CastleInfo castleInfo = castleRepo.findByName(name);
         String castleName = castleInfo.getName();
         model.addAttribute("castleInfo", castleInfo);
-        model.addAttribute("castleName", castleName.substring(0,1).toUpperCase() + castleName.substring(1));
+        model.addAttribute("castleName", castleName.substring(0,1).toUpperCase()
+                + castleName.substring(1));
         return "castle.html";
     }
 
@@ -70,8 +72,7 @@ public class HomeController {
                                  @RequestParam("castleName") String castleName,
                                  @RequestParam("noOfVisitors") int noOfVisitors,
                                  Model model) {
-        CastleInfo castleInfo = castleInfoRepository.findByName(castleName);
-
+        CastleInfo castleInfo = castleRepo.findByName(castleName);
         if (castleInfo == null) {
             model.addAttribute("message", "No such castles found.");
             return "error";
@@ -82,16 +83,16 @@ public class HomeController {
         LocalTime openTime = castleInfo.getOpenTime();
         LocalTime closeTime = castleInfo.getCloseTime();
 
-        List<ScheduleInfo> outboundSchedules = scheduleInfoRepository.findOutboundSchedules(departTime, departTime.plusHours(1), castleId);
-
+        List<ScheduleInfo> outboundSchedules = scheduleRepo.findOutboundSchedules(departTime, departTime.plusHours(1), castleId);
         List<RoundTripDTO> roundTripList = new ArrayList<>();
 
-
         for(ScheduleInfo outbound : outboundSchedules) {
-            List<ScheduleInfo> returnSchedules = scheduleInfoRepository.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
+            List<ScheduleInfo> returnSchedules = scheduleRepo.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
             for(ScheduleInfo returnOption : returnSchedules) {
-                LocalTime earliestFinishTime = outbound.getArriveTime().plusHours(2); // recommended earliest time post-arrival castle viewing ends
-                LocalTime earliestReturnTime = openTime.plusHours(2); // earliest time after castle opening user returns
+                // recommended earliest time post-arrival that castle trip ends
+                LocalTime earliestFinishTime = outbound.getArriveTime().plusHours(2);
+                // earliest time after castle opening that user returns
+                LocalTime earliestReturnTime = openTime.plusHours(2);
                 if(earliestFinishTime.isBefore(returnOption.getDepartTime())
                         && earliestFinishTime.isBefore(closeTime)
                         && earliestReturnTime.isBefore(returnOption.getDepartTime())) {
@@ -102,11 +103,11 @@ public class HomeController {
             }
         }
 
-        if(roundTripList.isEmpty()){
+        if(roundTripList.isEmpty()) {
             model.addAttribute("message", "No itineraries found.");
             return "error";
         }
-        else{
+        else {
             model.addAttribute("roundTripList", roundTripList);
             model.addAttribute("castleName", castleName.substring(0, 1).toUpperCase() + castleName.substring(1));
             model.addAttribute("noOfVisitors", noOfVisitors);
@@ -121,19 +122,20 @@ public class HomeController {
                                    @RequestParam("noOfVisitors") int noOfVisitors,
                                    @RequestParam("totalPrice") double totalPrice,
                                    Model model) {
-        ScheduleInfo outbound = scheduleInfoRepository.findByScheduleId(outboundId);
-        ScheduleInfo returnOption = scheduleInfoRepository.findByScheduleId(returnId);
-        List<RouteStop> outboundStops = routeStopRepository.findRouteStopsByRouteId(outbound.getRouteId());
-        List<RouteStop> returnStops = routeStopRepository.findRouteStopsByRouteId(returnOption.getRouteId());
-        if(outboundStops.isEmpty() || returnStops.isEmpty()){
+        ScheduleInfo outbound = scheduleRepo.findByScheduleId(outboundId);
+        ScheduleInfo returnOption = scheduleRepo.findByScheduleId(returnId);
+        List<RouteStop> outboundStops = routeStopRepo.findRouteStopsByRouteId(outbound.getRouteId());
+        List<RouteStop> returnStops = routeStopRepo.findRouteStopsByRouteId(returnOption.getRouteId());
+        if(outboundStops.isEmpty() || returnStops.isEmpty()) {
             model.addAttribute("message", "Stops missing.");
             return "error";
         }
-        RoundTripDTO roundTripDTO = new RoundTripDTO(outbound, returnOption, outboundStops, returnStops);
-        roundTripDTO.setTotalPrice(totalPrice);
-        CastleInfo castleInfo = castleInfoRepository.findByName(castleName.toLowerCase());
 
-        model.addAttribute("trip", roundTripDTO);
+        RoundTripDTO dto = new RoundTripDTO(outbound, returnOption, outboundStops, returnStops);
+        dto.setTotalPrice(totalPrice);
+        CastleInfo castleInfo = castleRepo.findByName(castleName.toLowerCase());
+
+        model.addAttribute("trip", dto);
         model.addAttribute("castleInfo", castleInfo);
         model.addAttribute("castleName", castleName);
         model.addAttribute("noOfVisitors", noOfVisitors);
