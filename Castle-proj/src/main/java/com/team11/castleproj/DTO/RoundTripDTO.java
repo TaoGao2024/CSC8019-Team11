@@ -6,15 +6,19 @@ import com.team11.castleproj.Entity.ScheduleInfo;
 import java.util.List;
 
 public class RoundTripDTO {
-    private ScheduleInfo outboundSchedule;
-    private ScheduleInfo returnSchedule;
+    private final ScheduleInfo outboundSchedule;
+    private final ScheduleInfo returnSchedule;
     private double totalPrice;
     private List<RouteStop> outboundStops, returnStops;
 
-    public RoundTripDTO(ScheduleInfo outboundSchedule, ScheduleInfo returnSchedule, List<RouteStop> outboundStops, List<RouteStop> returnStops) {
+    public RoundTripDTO(ScheduleInfo outboundSchedule, ScheduleInfo returnSchedule) {
         this.outboundSchedule = outboundSchedule;
         this.returnSchedule = returnSchedule;
         this.totalPrice = 0.0;
+    }
+
+    public RoundTripDTO(ScheduleInfo outboundSchedule, ScheduleInfo returnSchedule, List<RouteStop> outboundStops, List<RouteStop> returnStops) {
+        this(outboundSchedule, returnSchedule);
         this.outboundStops = outboundStops;
         this.returnStops = returnStops;
     }

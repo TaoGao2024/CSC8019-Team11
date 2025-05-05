@@ -87,19 +87,15 @@ public class HomeController {
         List<RoundTripDTO> roundTripList = new ArrayList<>();
 
 
-        for(ScheduleInfo outbound : outboundSchedules){
+        for(ScheduleInfo outbound : outboundSchedules) {
             List<ScheduleInfo> returnSchedules = scheduleInfoRepository.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
-            for(ScheduleInfo returnOption : returnSchedules){
+            for(ScheduleInfo returnOption : returnSchedules) {
                 LocalTime earliestFinishTime = outbound.getArriveTime().plusHours(2); // recommended earliest time post-arrival castle viewing ends
                 LocalTime earliestReturnTime = openTime.plusHours(2); // earliest time after castle opening user returns
-                if(earliestFinishTime.isBefore(returnOption.getDepartTime()) && earliestFinishTime.isBefore(closeTime) && returnOption.getDepartTime().isAfter(earliestReturnTime)){
-                    List<RouteStop> outboundStops = routeStopRepository.findRouteStopsByRouteId(outbound.getRouteId());
-                    List<RouteStop> returnStops = routeStopRepository.findRouteStopsByRouteId(returnOption.getRouteId());
-                    if(outboundStops.isEmpty() || returnStops.isEmpty()){
-                        model.addAttribute("message", "Stops missing.");
-                        return "error";
-                    }
-                    RoundTripDTO dto = new RoundTripDTO(outbound, returnOption, outboundStops, returnStops);
+                if(earliestFinishTime.isBefore(returnOption.getDepartTime())
+                        && earliestFinishTime.isBefore(closeTime)
+                        && earliestReturnTime.isBefore(returnOption.getDepartTime())) {
+                    RoundTripDTO dto = new RoundTripDTO(outbound, returnOption);
                     dto.calcTotalPrice(entryFee, noOfVisitors);
                     roundTripList.add(dto);
                 }
@@ -129,10 +125,13 @@ public class HomeController {
         ScheduleInfo returnOption = scheduleInfoRepository.findByScheduleId(returnId);
         List<RouteStop> outboundStops = routeStopRepository.findRouteStopsByRouteId(outbound.getRouteId());
         List<RouteStop> returnStops = routeStopRepository.findRouteStopsByRouteId(returnOption.getRouteId());
+        if(outboundStops.isEmpty() || returnStops.isEmpty()){
+            model.addAttribute("message", "Stops missing.");
+            return "error";
+        }
         RoundTripDTO roundTripDTO = new RoundTripDTO(outbound, returnOption, outboundStops, returnStops);
         roundTripDTO.setTotalPrice(totalPrice);
         CastleInfo castleInfo = castleInfoRepository.findByName(castleName.toLowerCase());
-        // Add walking instructions
 
         model.addAttribute("trip", roundTripDTO);
         model.addAttribute("castleInfo", castleInfo);
