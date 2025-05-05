@@ -86,6 +86,7 @@ public class HomeController {
 
         List<RoundTripDTO> roundTripList = new ArrayList<>();
 
+
         for(ScheduleInfo outbound : outboundSchedules){
             List<ScheduleInfo> returnSchedules = scheduleInfoRepository.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
             for(ScheduleInfo returnOption : returnSchedules){
