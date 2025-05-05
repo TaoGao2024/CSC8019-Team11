@@ -24,119 +24,100 @@
 
 <body>
 
-    <!-- Header Section with Background Image -->
-    <header class="hero">
-        <div class="hero-overlay">
-            <div class="hero-bar">
-                <div class="logo">Historical Castles</div>
-                <div class="top-right-controls">
-                    <button class="icon-btn" id="searchBtn"><i class="fas fa-magnifying-glass"></i></button>
+<!-- Header Section with Background Image -->
+<header class="hero">
+    <div class="hero-overlay">
 
-                    <div class="user-section">
-                        <button class="icon-btn" id="userIconBtn"><i class="fas fa-user"></i></button>
-                        <span id="user-name" class="hidden"></span>
-                        <div class="dropdown hidden" id="dropdown">
+        <div class="hero-bar">
+            <div class="logo">Historical Castles</div>
+            <div class="top-right-controls">
+                <button class="icon-btn" id="searchBtn"><i class="fas fa-magnifying-glass"></i></button>
 
-                            <a href="login.html" id="sign-in-option">Sign In</a>
-
-                            <a href="UserAccountPage.html" class="auth-only hidden" id="account-link">My Account</a>
-                            <a href="#" class="auth-only hidden" id="logout-btn">Log out</a>
-                        </div>
+                <div class="user-section">
+                    <button class="icon-btn" id="userIconBtn"><i class="fas fa-user"></i></button>
+                    <span id="user-name" class="hidden"></span>
+                    <div class="dropdown hidden" id="dropdown">
+                        <a href="login.html" id="sign-in-option">Sign In</a>
+                        <a href="UserAccountPage.html" class="auth-only hidden" id="account-link">My Account</a>
+                        <a href="#" class="auth-only hidden" id="logout-btn">Log out</a>
                     </div>
                 </div>
-
             </div>
-            
         </div>
+
+        <section class="filter-bar">
+            <div class="filter-wrapper">
+                <div class="filter-grid">
+                    <select id="departure-time">
+                        <option value="">Departure after</option>
+                        <option>08:00</option><option>09:00</option><option>10:00</option>
+                        <option>11:00</option><option>12:00</option><option>13:00</option>
+                        <option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option>
+                    </select>
+
+                    <select id="return-time">
+                        <option value="">Return time</option>
+                        <option>14:00</option><option>15:00</option><option>16:00</option>
+                        <option>17:00</option><option>18:00</option><option>19:00</option>
+                    </select>
+
+                    <select id="visitor-number">
+                        <option value="">Number of visitors</option>
+                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                    </select>
+
+                    <select id="castle-select">
+                        <option value="">Select castle</option>
+                        <option value="alnwick">Alnwick Castle</option>
+                        <option value="auckland">Auckland Castle</option>
+                    </select>
+                    <button id="submitTrip" class="submit-btn">Submit</button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
     <div class="search-box" id="search-box">
-                <input type="text" id="search-input" placeholder="Search for castles...">
-                <button id="searchSubmitBtn">Search</button>
-            </div>
-    </header>
+        <input type="text" id="search-input" placeholder="Search for castles...">
+        <button id="searchSubmitBtn">Search</button>
+    </div>
+</header>
 
 
-    <section class="filter-bar">
-        <div class="filter-wrapper">
-            <div class="filter-grid">
-                <select id="departure-time">
-                    <option value="">Departure after</option>
-                    <option>08:00</option>
-                    <option>09:00</option>
-                    <option>10:00</option>
-                    <option>11:00</option>
-                    <option>12:00</option>
-                    <option>13:00</option>
-                    <option>14:00</option>
-                    <option>15:00</option>
-                    <option>16:00</option>
-                    <option>17:00</option>
-                </select>
 
-                <select id="return-time">
-                    <option value="">Return time</option>
-                    <option>14:00</option>
-                    <option>15:00</option>
-                    <option>16:00</option>
-                    <option>17:00</option>
-                    <option>18:00</option>
-                    <option>19:00</option>
-                </select>
 
-                <select id="visitor-number">
-                    <option value="">Number of visitors</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-        
-                <select id="castle-select">
-                    <option value="">Select castle</option>
-                    <option value="alnwick">Alnwick Castle</option>
-                    <option value="auckland">Auckland Castle</option>
-                    <option value="bamburgh">Bamburgh Castle</option>
-                    <option value="barnard">Barnard Castle</option>
-                </select>
-        </div>
-        
-  <button id="submitTrip" class="submit-btn">Submit</button>
-</div>
+<section class="castle-grid">
+    <div class="castle" id="alnwick">
+        <img src="/images/AlnwickCastle.jpg" alt="Alnwick Castle - A historic site with grand architecture.">
+        <h3>Alnwick Castle</h3>
+        <p>Famous for its role in movies and medieval history.</p>
+        <button class="info-btn" data-castle="alnwick">Castle Information</button>
+    </div>
 
-    </section>
+    <div class="castle" id="auckland">
+        <img src="/images/AucklandCastle.jpg" alt="Auckland Castle - A stunning medieval palace.">
+        <h3>Auckland Castle</h3>
+        <p>Known for its beautiful gardens and rich history.</p>
+        <button class="info-btn" data-castle="auckland">Castle Information</button>
+    </div>
 
-   
-    <section class="castle-grid">
-        <div class="castle" id="alnwick">
-            <img src="/images/AlnwickCastle.jpg" alt="Alnwick Castle - A historic site with grand architecture.">
-            <h3>Alnwick Castle</h3>
-            <p>Famous for its role in movies and medieval history.</p>
-            <button class="info-btn" data-castle="alnwick">Castle Information</button>
-        </div>
+    <div class="castle" id="bamburgh">
+        <img src="/images/BamburghCastle.jpg" alt="Bamburgh Castle - A coastal fortress with breathtaking views.">
+        <h3>Bamburgh Castle</h3>
+        <p>Overlooks the sea with a fascinating past.</p>
+        <button class="info-btn" data-castle="bamburgh">Castle Information</button>
+    </div>
 
-        <div class="castle" id="auckland">
-            <img src="/images/AucklandCastle.jpg" alt="Auckland Castle - A stunning medieval palace.">
-            <h3>Auckland Castle</h3>
-            <p>Known for its beautiful gardens and rich history.</p>
-            <button class="info-btn" data-castle="auckland">Castle Information</button>
-        </div>
+    <div class="castle" id="barnard">
+        <img src="images/BarnardCastle.jpg" alt="Barnard Castle - A scenic ruin with cultural significance.">
+        <h3>Barnard Castle</h3>
+        <p>Offers stunning landscapes and a historic feel.</p>
+        <button class="info-btn" data-castle="barnard">Castle Information</button>
+    </div>
+</section>
 
-        <div class="castle" id="bamburgh">
-            <img src="/images/BamburghCastle.jpg" alt="Bamburgh Castle - A coastal fortress with breathtaking views.">
-            <h3>Bamburgh Castle</h3>
-            <p>Overlooks the sea with a fascinating past.</p>
-            <button class="info-btn" data-castle="bamburgh">Castle Information</button>
-        </div>
-
-        <div class="castle" id="barnard">
-            <img src="images/BarnardCastle.jpg" alt="Barnard Castle - A scenic ruin with cultural significance.">
-            <h3>Barnard Castle</h3>
-            <p>Offers stunning landscapes and a historic feel.</p>
-            <button class="info-btn" data-castle="barnard">Castle Information</button>
-        </div>
-    </section>
-
-    <script src="/js/HomePage.js" defer></script>
+<script src="/js/HomePage.js" defer></script>
 
 </body>
 

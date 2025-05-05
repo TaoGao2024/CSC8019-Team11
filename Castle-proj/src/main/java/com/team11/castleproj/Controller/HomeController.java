@@ -114,6 +114,7 @@ public class HomeController {
         }
         else{
             model.addAttribute("roundTripList", roundTripList);
+            model.addAttribute("castleName", castleName.substring(0, 1).toUpperCase() + castleName.substring(1));
             return "routeSelection";
         }
     }

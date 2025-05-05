@@ -4,100 +4,37 @@
   <meta charset="UTF-8">
   <title>Castle Information</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="castle.css">
-  <style>
-   body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-  }
-      
-    .page-header {
-    background-color: rgba(4, 58, 6, 0.8);
-    padding: 20px 30px;
-    color: white;
-}
-
-    .header-bar {
-    display: flex;
-    align-items: center;
-    grid-gap: 24px;
-    flex-wrap: wrap;
-}
-
-  .back-button {
-    padding: 3px 10px;
-    background-color: white;
-    color: rgba(4, 58, 6, 0.8);
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-right: 40px;
-    cursor: pointer;
-
-  }
-
-  .back-button:hover {
-    background-color: #e6e6e6;
-  }
-      
-    .page-header h1 {
-  font-size: 24px;
-  margin: 0;
-}
-
-  @media screen and (max-width: 768px) {
-    .header-bar {
-    flex-direction: row;
-    justify-content: flex-start;
-    grid-gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .page-header h1 {
-    font-size: 20px;
-  }
-
-  .back-button {
-    font-size: 14px;
-    padding: 6px 12px;
-  }
-  }
-
-  </style>
+  <link rel="stylesheet" href="/css/castle.css">
 </head>
 
 <body>
 
-  <header class="page-header">
-   <div class="header-bar">
-     <a href="/" class="back-button">← Back</a>
-     <h1 th:text="${'Welcome to ' + castleName}"></h1>
-    </div>
-  </header>
+<header class="page-header">
+  <div class="header-bar">
+    <a href="/" class="back-button">← Back</a>
+    <h1 th:text="${'Welcome to ' + castleName + ' Castle'}"></h1>
+  </div>
+</header>
 
-  <main class="page-content">
-    <section class="info-card">
-      <p id="castle-description"></p>
-      <p><strong>Official Website:</strong> <a id="castle-link" href="#" target="_blank">Visit Site</a></p>
-      <h4>Highlights:</h4>
-      <ul id="castle-highlights"></ul>
-    </section>
-    <section class="info-card">
-      <p th:text="${castleInfo.description}">Castle description will appear here.</p>
-      <p>
-        <strong>Entry Fee:</strong> £<span th:text="${castleInfo.entryFee}">0.00</span>
-      </p>
+<main class="page-content">
+  <section class="info-card">
+    <p id="castle-description"></p>
+    <p><strong>Official Website:</strong> <h th:text="${'www.' + castleName + 'castle.com'}"></h></p>
+  </section>
 
-    </section>
-  </main>
+  <section class="info-card">
+    <h4>Highlights:</h4>
+    <ul id="castle-highlights"></ul>
+    <p th:text="${castleInfo.description}">Castle description will appear here.</p>
 
-  <script src="castle.js"></script>
+    <p>
+      <strong>Entry Fee:</strong> £<span th:text="${castleInfo.entryFee}">0.00</span>
+    </p>
+  </section>
+
+</main>
+
+<script src="castle.js"></script>
 </body>
 </html>
 

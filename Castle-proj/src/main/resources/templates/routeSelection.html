@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="/css/routeSelection.css"/>
 <head>
     <meta charset="UTF-8">
-    <title>Castle Trip Planner - Routes</title>
+    <title>Itinerary</title>
+    <link rel="stylesheet" href="/css/routeSelection.css">
 </head>
 <body>
-<h1>Select a Travel Option</h1>
-<div th:each="trip : ${roundTripList}" class="trip-section">
-    <h3>Departure Trip</h3>
-    <ul>
-        <li th:each="stop : ${trip.outboundStops}">
-            <span th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.outboundSchedule.departTime}"></span></span>
-            <span th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.outboundStops.size()}">Transfer from <span th:text="${stop.stopInfo.name}"></span></span>
-            <span th:if="${stop.sequenceNum} == ${trip.outboundStops.size()}">Arrive at <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.outboundSchedule.arriveTime}"></span></span>
-        </li>
-    </ul>
-    <h3>Return Trip</h3>
-    <ul>
-        <li th:each="stop : ${trip.returnStops}">
-            <span th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.returnSchedule.departTime}"></span></span>
-            <span th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.returnStops.size()}">Transfer at <span th:text="${stop.stopInfo.name}"></span></span>
-            <span th:if="${stop.sequenceNum} == ${trip.returnStops.size()}">Arrive at <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.returnSchedule.arriveTime}"></span></span>
-        </li>
-    </ul>
+<header class="page-header">
+    <div class="header-bar">
+        <a href="/" class="back-button">← Back</a>
+        <h1>Itinerary</h1>
+    </div>
+</header>
 
-    <h3 class="price">Total Price: £<span th:text="${trip.totalPrice}"></span></h3>
-    <button>Select option</button>
-<!--    <a th:href="@{/itinerary(outboundId=${trip.outboundSchedule.scheduleId}, returnId=${trip.returnSchedule.scheduleId})}">Select</a>-->
-</div>
+<main class="page-content">
+    <div th:unless="${#lists.isEmpty(roundTripList)}" th:each="trip : ${roundTripList}" class="trip-card">
+        <div class="trip-table">
+            <div class="trip-header">
+                <div>Newcastle</div>
+                <div class="arrow">⇆</div>
+                <div th:text="${castleName + ' Castle'}" class="no-wrap-text"></div>
+            </div>
+            <div class="trip-row">
+                <div th:text="'Depart: ' + ${trip.outboundSchedule?.departTime}"></div>
+                <div></div>
+                <div th:text="'Arrive: ' + ${trip.outboundSchedule?.arriveTime}"></div>
+            </div>
+            <div class="trip-row">
+                <div th:text="'Arrive: ' + ${trip.returnSchedule?.arriveTime}"></div>
+                <div></div>
+                <div th:text="'Return: ' + ${trip.returnSchedule?.departTime}"></div>
+            </div>
+        </div>
+        <div class="trip-price">
+            Total Price: <span th:text="${trip?.getTotalPrice() != null ? trip.getTotalPrice() : 'N/A'}"></span>
+        </div>
+    </div>
+</main>
 </body>
 </html>
