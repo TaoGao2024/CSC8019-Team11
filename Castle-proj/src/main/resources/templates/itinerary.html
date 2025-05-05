@@ -20,23 +20,21 @@
     <img th:src="@{'/images/' + ${castleName} + '.jpg'}" th:alt="'A photo of' + ${castleName}">
 
     <h3>Departure Trip</h3>
-    <ul>
-      <li th:each="stop : ${trip.outboundStops}">
-        <span th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> via <span th:text="${stop.busService}"></span> at <span th:text="${trip.outboundSchedule.departTime}"></span></span>
-        <span th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.outboundStops.size()}">Transfer to <span th:text="${stop.busService}"></span> from <span th:text="${stop.stopInfo.name}"></span></span>
-        <span th:if="${stop.sequenceNum} == ${trip.outboundStops.size()}">Arrive to <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.outboundSchedule.arriveTime}"></span></span>
-      </li>
+    <ul th:each="stop : ${trip.outboundStops}">
+        <li th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> via <span th:text="${stop.busService}"></span> at <span th:text="${trip.outboundSchedule.departTime}"></span></li>
+        <li th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.outboundStops.size()}">Transfer to <span th:text="${stop.busService}"></span> from <span th:text="${stop.stopInfo.name}"></span></li>
+        <li th:if="${stop.sequenceNum} == ${trip.outboundStops.size()}">Arrive to <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.outboundSchedule.arriveTime}"></span></li>
+        <li th:if="${stop.sequenceNum} == ${trip.returnStops.size()}"><span th:text="${stop.stopInfo.instructions}"></span></li>
     </ul>
     <h3>Return Trip</h3>
-    <ul>
-      <li th:each="stop : ${trip.returnStops}">
-        <span th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> via <span th:text="${stop.busService}"></span> at <span th:text="${trip.returnSchedule.departTime}"></span></span>
-        <span th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.returnStops.size()}">Transfer to <span th:text="${stop.busService}"></span> at <span th:text="${stop.stopInfo.name}"></span></span>
-        <span th:if="${stop.sequenceNum} == ${trip.returnStops.size()}">Arrive to <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.returnSchedule.arriveTime}"></span></span>
-      </li>
-    </ul>
+      <ul th:each="stop : ${trip.returnStops}">
+        <li th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> via <span th:text="${stop.busService}"></span> at <span th:text="${trip.returnSchedule.departTime}"></span></li>
+        <li th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.returnStops.size()}">Transfer to <span th:text="${stop.busService}"></span> at <span th:text="${stop.stopInfo.name}"></span></li>
+        <li th:if="${stop.sequenceNum} == ${trip.returnStops.size()}">Arrive to <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.returnSchedule.arriveTime}"></span></li>
+      </ul>
 
     <h3 class="trip-price">Total Price: £<span th:text="${trip.totalPrice}"></span></h3>
+    <h2>Walking to the castle</h2>
   </main>
 
 <!--  <script src="/js/itinerary.js"></script>-->
