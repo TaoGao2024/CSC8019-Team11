@@ -196,11 +196,6 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.castle:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
-    z-index: 3;
-}
 .castle img {
     display: block;
     width: 100%;
@@ -247,8 +242,8 @@ body {
 }
 
 .castle .info-btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .castle .info-btn:active {

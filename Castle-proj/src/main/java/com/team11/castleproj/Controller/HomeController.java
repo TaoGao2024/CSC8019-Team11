@@ -11,12 +11,13 @@
  * Modification history:
  * 5/4 Samuel Leung - Added sample queries to castle
  * 27/4 Tao Gao - Added routes and castle detail endpoint
- * 29/4 Samuel Leung & Tao Gao - Applied queries and algorithm for fetching
+ * 29/4 Tao Gao - Applied queries and algorithm for fetching
  * round trips in schedules endpoint
  * 30/4 Samuel Leung - Update castle detail endpoint
  * 2/5 Samuel Leung - Update algorithm to check for castle opening times;
  * add error and no routes found page
  * 4/5 Samuel Leung - Add Itinerary endpoint
+ * 5/5 Samuel Leung -Simplify logic of controllers
  */
 package com.team11.castleproj.Controller;
 
@@ -90,12 +91,12 @@ public class HomeController {
             List<ScheduleInfo> returnSchedules = scheduleRepo.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
             for(ScheduleInfo returnOption : returnSchedules) {
                 // recommended earliest time post-arrival that castle trip ends
-                LocalTime earliestFinishTime = outbound.getArriveTime().plusHours(2);
+                LocalTime earliestFinish = outbound.getArriveTime().plusHours(2);
                 // earliest time after castle opening that user returns
-                LocalTime earliestReturnTime = openTime.plusHours(2);
-                if(earliestFinishTime.isBefore(returnOption.getDepartTime())
-                        && earliestFinishTime.isBefore(closeTime)
-                        && earliestReturnTime.isBefore(returnOption.getDepartTime())) {
+                LocalTime earliestReturn = openTime.plusHours(2);
+                if(earliestFinish.isBefore(returnOption.getDepartTime())
+                        && earliestFinish.isBefore(closeTime)
+                        && earliestReturn.isBefore(returnOption.getDepartTime())) {
                     RoundTripDTO dto = new RoundTripDTO(outbound, returnOption);
                     dto.calcTotalPrice(entryFee, noOfVisitors);
                     roundTripList.add(dto);
@@ -127,7 +128,7 @@ public class HomeController {
         List<RouteStop> outboundStops = routeStopRepo.findRouteStopsByRouteId(outbound.getRouteId());
         List<RouteStop> returnStops = routeStopRepo.findRouteStopsByRouteId(returnOption.getRouteId());
         if(outboundStops.isEmpty() || returnStops.isEmpty()) {
-            model.addAttribute("message", "Stops missing.");
+            model.addAttribute("message", "Error: Bus stops missing.");
             return "error";
         }
 
