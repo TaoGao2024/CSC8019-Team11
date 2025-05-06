@@ -1,0 +1,136 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.page-header {
+    text-align: center;
+    background-color: rgba(4, 58, 6, 0.8);
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.page-header h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.page-header span {
+    font-style: italic;
+}
+
+.castle-description {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.visitor-count {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.castle-image {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-content {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-content h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.page-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.page-content ul li {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.page-content ul li span {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.page-content button {
+    display: block;
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.page-content button:hover {
+    background-color: #2980b9;
+}
+
+.page-content img {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.trip-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #27ae60;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.trip-price span {
+    font-size: 24px;
+    color: #e74c3c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .page-content h3 {
+        font-size: 20px;
+    }
+
+    .page-content ul li {
+        font-size: 16px;
+    }
+
+    .trip-price {
+        font-size: 18px;
+    }
+}

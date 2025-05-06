@@ -105,7 +105,7 @@ public class HomeController {
         }
 
         if(roundTripList.isEmpty()) {
-            model.addAttribute("message", "No itineraries found.");
+            model.addAttribute("message", "No itineraries found. Please try selecting different options.");
             return "error";
         }
         else {

@@ -15,9 +15,9 @@
 
   <main class="page-content">
     <button>Download Itinerary</button>
-    <div th:text="${castleInfo.description}"></div>
-    <div th:text="${noOfVisitors} + ' visitors'"></div>
-    <img th:src="@{'/images/' + ${castleName} + '.jpg'}" th:alt="'A photo of' + ${castleName}">
+    <div th:text="${castleInfo.description}" class="castle-description"></div>
+    <div th:text="${noOfVisitors} + ' visitors'" class="visitor-count"></div>
+    <img th:src="@{'/images/' + ${castleName} + '.jpg'}" th:alt="'A photo of' + ${castleName}" class="castle-image">
 
     <h3>Departure Trip</h3>
     <ul th:each="stop : ${trip.outboundStops}">

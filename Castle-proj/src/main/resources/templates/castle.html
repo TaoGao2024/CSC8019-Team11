@@ -19,7 +19,9 @@
 <main class="page-content">
   <section class="info-card">
     <p id="castle-description"></p>
-    <p><strong>Official Website:</strong> <h th:text="${'www.' + castleName + 'castle.com'}"></h></p>
+    <p><strong>Official Website:</strong>
+      <a th:href="${'https://www.' + castleName + 'castle.com'}" target="_blank">Visit Official Website</a>
+    </p>
   </section>
 
   <section class="info-card">
