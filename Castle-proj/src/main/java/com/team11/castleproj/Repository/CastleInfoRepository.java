@@ -5,6 +5,7 @@ import com.team11.castleproj.Entity.CastleInfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+
 public interface CastleInfoRepository extends JpaRepository<CastleInfo, Integer> {
     @Query("SELECT c FROM CastleInfo c WHERE c.name = :name")
     CastleInfo findByName(@Param("name") String name);
