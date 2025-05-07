@@ -17,7 +17,8 @@
  * 2/5 Samuel Leung - Update algorithm to check for castle opening times;
  * add error and no routes found page
  * 4/5 Samuel Leung - Add Itinerary endpoint
- * 5/5 Samuel Leung -Simplify logic of controllers
+ * 5/5 Samuel Leung - Simplify logic of controllers
+ * 7/5 Samuel Leung - Update logic to account for day availability of routes
  */
 package com.team11.castleproj.Controller;
 
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -42,6 +44,7 @@ public class HomeController {
     private final CastleInfoRepository castleRepo;
     private final ScheduleInfoRepository scheduleRepo;
     private final RouteStopRepository routeStopRepo;
+    private List<String> weekdays;
 
     @Autowired
     public HomeController(CastleInfoRepository castleRepo,
@@ -50,6 +53,7 @@ public class HomeController {
         this.castleRepo = castleRepo;
         this.scheduleRepo = scheduleRepo;
         this.routeStopRepo = routeStopRepo;
+        this.weekdays = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
     }
 
     @GetMapping("/")
@@ -72,6 +76,7 @@ public class HomeController {
                                  @RequestParam("returnTime") LocalTime returnTime,
                                  @RequestParam("castleName") String castleName,
                                  @RequestParam("noOfVisitors") int noOfVisitors,
+                                 @RequestParam("travelDay") String travelDay,
                                  Model model) {
         CastleInfo castleInfo = castleRepo.findByName(castleName);
         if (castleInfo == null) {
@@ -83,12 +88,20 @@ public class HomeController {
         double entryFee = castleInfo.getEntryFee();
         LocalTime openTime = castleInfo.getOpenTime();
         LocalTime closeTime = castleInfo.getCloseTime();
+        String availability = weekdays.contains(travelDay) ? "Weekday" : travelDay;
+        System.out.println(availability);
 
-        List<ScheduleInfo> outboundSchedules = scheduleRepo.findOutboundSchedules(departTime, departTime.plusHours(1), castleId);
+        List<ScheduleInfo> outboundSchedules = scheduleRepo.findOutboundSchedules(departTime,
+                departTime.plusHours(1),
+                castleId,
+                availability);
         List<RoundTripDTO> roundTripList = new ArrayList<>();
 
         for(ScheduleInfo outbound : outboundSchedules) {
-            List<ScheduleInfo> returnSchedules = scheduleRepo.findReturnSchedules(returnTime, returnTime.plusHours(1), castleId);
+            List<ScheduleInfo> returnSchedules = scheduleRepo.findReturnSchedules(returnTime,
+                    returnTime.plusHours(1),
+                    castleId,
+                    availability);
             for(ScheduleInfo returnOption : returnSchedules) {
                 // recommended earliest time post-arrival that castle trip ends
                 LocalTime earliestFinish = outbound.getArriveTime().plusHours(2);
@@ -105,7 +118,7 @@ public class HomeController {
         }
 
         if(roundTripList.isEmpty()) {
-            model.addAttribute("message", "No itineraries found. Please try selecting different options.");
+            model.addAttribute("message", "No itineraries found. Please try adjusting the time or day of your visit.");
             return "error";
         }
         else {

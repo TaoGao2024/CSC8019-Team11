@@ -7,8 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const departureTime = document.getElementById("departure-time").value;
         const returnTime = document.getElementById("return-time").value;
         const visitorNumber = document.getElementById("visitor-number").value;
+        const travelDay = document.getElementById("travel-day").value;
 
-        if (!selectedCastle || !departureTime || !returnTime || !visitorNumber) {
+        if (!selectedCastle || !departureTime || !returnTime || !visitorNumber || !travelDay) {
           alert("Please select castle, departure time, return time, and number of visitors.");
           return;
         }
@@ -17,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
           departTime: departureTime,
           returnTime: returnTime,
           castleName: selectedCastle,
-          noOfVisitors: visitorNumber
+          noOfVisitors: visitorNumber,
+          travelDay: travelDay
         });
 
         window.location.href = `/schedules?${params.toString()}`;

@@ -44,14 +44,14 @@ public class QueryTest {
             assertThat(!returnOption.isEmpty()).isNotNull();
 
             // Find associated stops for a generated route
-//            var outboundStops = routeStopRepo.findRouteStopsByRouteId(outbound.getFirst().getRouteId());
-//            var returnStops = routeStopRepo.findRouteStopsByRouteId(returnOption.getFirst().getRouteId());
-//            assertThat(outboundStops.size() >= 2).isTrue();
-//            assertThat(returnStops.size() >= 2).isTrue();
-//            String startStop = outboundStops.get(0).getStopInfo().getName();
-//            String endStop = returnStops.get(returnStops.size()-1).getStopInfo().getName();
-//            assertThat(startStop.equals("Haymarket Bus Station") || startStop.equals("Eldon Square")).isTrue();
-//            assertThat(endStop.equals("Haymarket Bus Station") || endStop.equals("Eldon Square")).isTrue();
+            var outboundStops = routeStopRepo.findRouteStopsByRouteId(outbound.getFirst().getRouteId());
+            var returnStops = routeStopRepo.findRouteStopsByRouteId(returnOption.getFirst().getRouteId());
+            assertThat(outboundStops.size() >= 2).isTrue();
+            assertThat(returnStops.size() >= 2).isTrue();
+            String startStop = outboundStops.get(0).getStopInfo().getName();
+            String endStop = returnStops.get(returnStops.size()-1).getStopInfo().getName();
+            assertThat(startStop.startsWith("Haymarket") || startStop.startsWith("Eldon Square")).isTrue();
+            assertThat(endStop.startsWith("Haymarket") || endStop.startsWith("Eldon Square")).isTrue();
         }
     }
 }

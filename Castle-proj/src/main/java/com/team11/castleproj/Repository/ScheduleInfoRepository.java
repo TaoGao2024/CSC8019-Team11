@@ -18,18 +18,22 @@ public interface ScheduleInfoRepository extends JpaRepository<ScheduleInfo, Inte
     @Query("SELECT s FROM ScheduleInfo s " +
             "WHERE s.route.castleDirection = true " +
             "AND s.route.castleId = :castleId " +
+            "AND s.route.availability = :availability " +
             "AND s.departTime BETWEEN :lowerBound AND :upperBound")
     List<ScheduleInfo> findOutboundSchedules(@Param("lowerBound") LocalTime lowerBound,
                                              @Param("upperBound") LocalTime upperBound,
-                                             @Param("castleId") String castleId);
+                                             @Param("castleId") String castleId,
+                                             @Param("availability") String availability);
 
     @Query("SELECT s FROM ScheduleInfo s " +
             "WHERE s.route.castleId = :castleId " +
             "AND s.route.castleDirection = false " +
+            "AND s.route.availability = :availability " +
             "AND s.departTime BETWEEN :lowerBound AND :upperBound")
     List<ScheduleInfo> findReturnSchedules(@Param("lowerBound") LocalTime lowerBound,
                                            @Param("upperBound") LocalTime upperBound,
-                                           @Param("castleId") String castleId);
+                                           @Param("castleId") String castleId,
+                                           @Param("availability") String availability);
 
 
 }
