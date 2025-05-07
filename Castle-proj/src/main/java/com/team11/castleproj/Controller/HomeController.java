@@ -98,7 +98,7 @@ public class HomeController {
 
         for(ScheduleInfo outbound : outboundSchedules) {
             List<ScheduleInfo> returnSchedules = scheduleRepo.findReturnSchedules(returnTime,
-                    returnTime.plusHours(1),
+                    returnTime.plusHours(2),
                     castleId,
                     availability);
             for(ScheduleInfo returnOption : returnSchedules) {
