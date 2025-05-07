@@ -16,7 +16,6 @@
   <main class="page-content">
     <button>Download Itinerary</button>
     <div th:text="${castleInfo.description}" class="castle-description"></div>
-    <div th:text="${noOfVisitors} + ' visitors'" class="visitor-count"></div>
     <img th:src="@{'/images/' + ${castleName} + '.jpg'}" th:alt="'A photo of' + ${castleName}" class="castle-image">
 
     <h3>Departure Trip</h3>
@@ -33,6 +32,7 @@
         <li th:if="${stop.sequenceNum} == ${trip.returnStops.size()}">Arrive to <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.returnSchedule.arriveTime}"></span></li>
       </ul>
 
+    <h2 th:text="${noOfVisitors} + ' visitors'" class="visitor-count"></h2>
     <h3 class="trip-price">Total Price: £<span th:text="${trip.totalPrice}"></span></h3>
   </main>
 

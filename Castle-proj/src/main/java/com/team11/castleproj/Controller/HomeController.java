@@ -89,7 +89,6 @@ public class HomeController {
         LocalTime openTime = castleInfo.getOpenTime();
         LocalTime closeTime = castleInfo.getCloseTime();
         String availability = weekdays.contains(travelDay) ? "Weekday" : travelDay;
-        System.out.println(availability);
 
         List<ScheduleInfo> outboundSchedules = scheduleRepo.findOutboundSchedules(departTime,
                 departTime.plusHours(1),
