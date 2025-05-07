@@ -44,7 +44,7 @@ public class HomeController {
     private final CastleInfoRepository castleRepo;
     private final ScheduleInfoRepository scheduleRepo;
     private final RouteStopRepository routeStopRepo;
-    private List<String> weekdays;
+    private final List<String> weekdays;
 
     @Autowired
     public HomeController(CastleInfoRepository castleRepo,
