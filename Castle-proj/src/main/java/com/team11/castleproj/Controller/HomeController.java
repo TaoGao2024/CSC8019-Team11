@@ -94,13 +94,13 @@ public class HomeController {
                 departTime.plusHours(1),
                 castleId,
                 availability);
+        List<ScheduleInfo> returnSchedules = scheduleRepo.findReturnSchedules(returnTime,
+                returnTime.plusHours(2),
+                castleId,
+                availability);
         List<RoundTripDTO> roundTripList = new ArrayList<>();
 
         for(ScheduleInfo outbound : outboundSchedules) {
-            List<ScheduleInfo> returnSchedules = scheduleRepo.findReturnSchedules(returnTime,
-                    returnTime.plusHours(2),
-                    castleId,
-                    availability);
             for(ScheduleInfo returnOption : returnSchedules) {
                 // recommended earliest time post-arrival that castle trip ends
                 LocalTime earliestFinish = outbound.getArriveTime().plusHours(2);
