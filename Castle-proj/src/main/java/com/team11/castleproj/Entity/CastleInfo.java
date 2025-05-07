@@ -38,4 +38,6 @@ public class CastleInfo {
     private LocalTime openTime;
     @Column(name = "ClOSETIME")
     private LocalTime closeTime;
+    @Column(name = "WEBSITE")
+    private String website;
 }
