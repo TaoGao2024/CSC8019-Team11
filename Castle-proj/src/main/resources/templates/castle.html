@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Castle Information</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/castle.css">
+    <meta charset="UTF-8">
+    <title>Castle Information</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/castle.css">
 </head>
 <body>
-  <header class="page-header">
+<header class="page-header">
     <div class="header-bar">
-      <a href="/" class="back-button">← Back</a>
-      <h1 th:text="${'Welcome to ' + castleName + ' Castle'}"></h1>
+        <a href="/" class="back-button">← Back</a>
+        <h1 th:text="${'Welcome to ' + castleName + ' Castle'}"></h1>
     </div>
-  </header>
-  <main class="page-content">
+</header>
+<main class="page-content">
     <section class="info-card">
-      <p id="castle-description"></p>
-      <p><strong>Official Website:</strong>
-        <a th:href="${castleInfo.website}" target="_blank">Visit Official Website</a>
-      </p>
+        <p id="castle-description"></p>
+        <p><strong>Official Website:</strong>
+            <a th:href="${castleInfo.website}" target="_blank">Visit Official Website</a>
+        </p>
     </section>
     <section class="info-card">
-      <h4>Highlights:</h4>
-      <ul id="castle-highlights"></ul>
-      <p th:text="${castleInfo.description}">Castle description will appear here.</p>
-      <div id="entry-details">
-        <p>
-          <strong>Entry Fee:</strong> £<span th:text="${castleInfo.entryFee}">0.00</span>
-        </p>
-        <p>
-          <strong>Opening time:</strong> <span th:text="${castleInfo.openTime}"></span>
-        </p>
-        <p>
-          <strong>Closing time:</strong> <span th:text="${castleInfo.closeTime}"></span>
-        </p>
-      </div>
-
+        <h4>Highlights:</h4>
+        <ul id="castle-highlights"></ul>
+        <p th:text="${castleInfo.description}">Castle description will appear here.</p>
+        <div id="entry-details">
+            <p>
+                <strong>Entry Fee:</strong> £<span th:text="${castleInfo.entryFee}">0.00</span>
+            </p>
+            <p>
+                <strong>Opening time:</strong> <span th:text="${castleInfo.openTime}"></span>
+            </p>
+            <p>
+                <strong>Closing time:</strong> <span th:text="${castleInfo.closeTime}"></span>
+            </p>
+        </div>
     </section>
-  </main>
+</main>
 </body>
 </html>
 

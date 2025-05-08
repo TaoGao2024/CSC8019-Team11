@@ -14,7 +14,7 @@
 </header>
 
 <main class="page-content">
-    <div th:unless="${#lists.isEmpty(roundTripList)}" th:each="trip : ${roundTripList}" class="trip-card">
+    <div th:each="trip : ${roundTripList}" class="trip-card">
         <div class="trip-table">
             <div class="trip-header">
                 <div>Newcastle</div>

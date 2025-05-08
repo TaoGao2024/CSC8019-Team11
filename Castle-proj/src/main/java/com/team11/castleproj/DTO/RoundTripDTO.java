@@ -2,10 +2,11 @@ package com.team11.castleproj.DTO;
 
 import com.team11.castleproj.Entity.RouteStop;
 import com.team11.castleproj.Entity.ScheduleInfo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class RoundTripDTO {
     private final ScheduleInfo outboundSchedule;
     private final ScheduleInfo returnSchedule;
