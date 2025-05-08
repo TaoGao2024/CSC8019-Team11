@@ -33,36 +33,10 @@
             </div>
         </div>
         <div class="trip-price">
-            Total Price: <span th:text="${trip?.getTotalPrice() != null ? trip.getTotalPrice() : 'N/A'}"></span>
+            Total Price: <span th:text="${trip.totalPrice}"></span>
         </div>
         <a th:href="@{/itinerary(outboundId=${trip.outboundSchedule.scheduleId}, returnId=${trip.returnSchedule.scheduleId}, castleName=${castleName}, noOfVisitors=${noOfVisitors}, totalPrice=${trip.totalPrice})}">View Details</a>
     </div>
-<!--    <div th:each="trip : ${roundTripList}" class="trip-card">-->
-<!--        <h3>Departure Trip</h3>-->
-<!--        <p th:text="'Depart at: ' + ${trip.outboundSchedule.departTime}"></p>-->
-<!--        <p th:text="'Arrive at: ' + ${trip.outboundSchedule.arriveTime}"></p>-->
-
-<!--        <ul>-->
-<!--            <li th:each="stop : ${trip.outboundStops}">-->
-<!--                <span th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.outboundSchedule.departTime}"></span></span>-->
-<!--                <span th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.outboundStops.size()}">Transfer from <span th:text="${stop.stopInfo.name}"></span></span>-->
-<!--                <span th:if="${stop.sequenceNum} == ${trip.outboundStops.size()}">Arrive at <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.outboundSchedule.arriveTime}"></span></span>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--        <h3>Return Trip</h3>-->
-<!--        <p th:text="'Return at: ' + ${trip.returnSchedule.departTime}"></p>-->
-<!--        <p th:text="'Arrive at: ' + ${trip.returnSchedule.arriveTime}"></p>-->
-<!--        <ul>-->
-<!--            <li th:each="stop : ${trip.returnStops}">-->
-<!--                <span th:if="${stop.sequenceNum} == 1">Depart from <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.returnSchedule.departTime}"></span></span>-->
-<!--                <span th:if="${stop.sequenceNum} > 1 and ${stop.sequenceNum} < ${trip.returnStops.size()}">Transfer at <span th:text="${stop.stopInfo.name}"></span></span>-->
-<!--                <span th:if="${stop.sequenceNum} == ${trip.returnStops.size()}">Arrive at <span th:text="${stop.stopInfo.name}"></span> at <span th:text="${trip.returnSchedule.arriveTime}"></span></span>-->
-<!--            </li>-->
-<!--        </ul>-->
-
-<!--        <h3 class="trip-price">Total Price: £<span th:text="${trip.totalPrice}"></span></h3>-->
-<!--        <a th:href="@{/itinerary(outboundId=${trip.outboundSchedule.scheduleId}, returnId=${trip.returnSchedule.scheduleId}, castleName=${castleName}, noOfVisitors=${noOfVisitors}, totalPrice=${trip.totalPrice})}">View Details</a>-->
-<!--    </div>-->
 </main>
 </body>
 </html>

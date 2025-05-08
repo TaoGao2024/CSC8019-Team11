@@ -58,16 +58,18 @@ public class HomeController {
 
     @GetMapping("/")
     public String homePage() {
-        return "HomePage";
+        return "homepage";
     }
 
     @GetMapping("/castle")
     public String getCastleDetail(@RequestParam("name") String name, Model model) {
-        CastleInfo castleInfo = castleRepo.findByName(name);
-        String castleName = castleInfo.getName();
+        CastleInfo castleInfo = castleRepo.findByName(name.toLowerCase());
         model.addAttribute("castleInfo", castleInfo);
-        model.addAttribute("castleName", castleName.substring(0, 1).toUpperCase()
-                + castleName.substring(1));
+        model.addAttribute("castleName", name);
+        if (castleInfo == null) {
+            model.addAttribute("message", "No such castles found.");
+            return "error";
+        }
         return "castle.html";
     }
 
@@ -78,7 +80,7 @@ public class HomeController {
                                  @RequestParam("noOfVisitors") int noOfVisitors,
                                  @RequestParam("travelDay") String travelDay,
                                  Model model) {
-        CastleInfo castleInfo = castleRepo.findByName(castleName);
+        CastleInfo castleInfo = castleRepo.findByName(castleName.toLowerCase());
         if (castleInfo == null) {
             model.addAttribute("message", "No such castles found.");
             return "error";
@@ -122,7 +124,7 @@ public class HomeController {
             return "error";
         } else {
             model.addAttribute("roundTripList", roundTripList);
-            model.addAttribute("castleName", castleName.substring(0, 1).toUpperCase() + castleName.substring(1));
+            model.addAttribute("castleName", castleName);
             model.addAttribute("noOfVisitors", noOfVisitors);
             return "routeSelection";
         }

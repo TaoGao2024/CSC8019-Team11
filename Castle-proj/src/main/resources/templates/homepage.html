@@ -1,82 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Castle Trip Planner - Home</title>
     <link rel="stylesheet" href="/css/HomePage.css">
-    <style>
-        .search-box {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: max-height 0.5s ease, opacity 0.5s ease;
-        }
-
-        .search-box.active {
-            max-height: 100px;
-            opacity: 1;
-        }
-    </style>
+    <script src="/js/HomePage.js" defer></script>
 </head>
-
 <body>
-
 <!-- Header Section with Background Image -->
 <header class="hero">
     <div class="hero-overlay">
-
         <div class="hero-bar">
             <div class="logo">Historical Castles</div>
-            <div class="top-right-controls">
-
-                <div class="user-section">
-                    <button class="icon-btn" id="userIconBtn"><i class="fas fa-user"></i></button>
-                    <span id="user-name" class="hidden"></span>
-                    <div class="dropdown hidden" id="dropdown">
-                        <a id="sign-in-option">Sign In</a>
-                        <a class="auth-only hidden" id="account-link">My Account</a>
-                        <a href="#" class="auth-only hidden" id="logout-btn">Log out</a>
-                    </div>
-                </div>
-            </div>
         </div>
-
         <section class="filter-bar">
             <div class="filter-wrapper">
                 <div class="filter-grid">
                     <select id="departure-time">
                         <option value="">Depart after</option>
-                        <option>06:00</option><option>07:00</option><option>08:00</option>
-                        <option>09:00</option><option>10:00</option><option>11:00</option>
-                        <option>12:00</option><option>13:00</option><option>14:00</option>
-                        <option>15:00</option><option>16:00</option><option>17:00</option>
+                        <option>06:00</option>
+                        <option>07:00</option>
+                        <option>08:00</option>
+                        <option>09:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
                     </select>
-
                     <select id="return-time">
                         <option value="">Return after</option>
-                        <option>10:00</option><option>11:00</option><option>12:00</option>
-                        <option>13:00</option><option>14:00</option><option>15:00</option>
-                        <option>16:00</option><option>17:00</option><option>18:00</option>
-                        <option>19:00</option><option>20:00</option><option>21:00</option>
+                        <option>10:00</option>
+                        <option>11:00</option>
+                        <option>12:00</option>
+                        <option>13:00</option>
+                        <option>14:00</option>
+                        <option>15:00</option>
+                        <option>16:00</option>
+                        <option>17:00</option>
+                        <option>18:00</option>
+                        <option>19:00</option>
+                        <option>20:00</option>
+                        <option>21:00</option>
                         <option>22:00</option>
                     </select>
-
                     <select id="visitor-number">
                         <option value="">Number of visitors</option>
-                        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
                     </select>
-
                     <select id="castle-select">
                         <option value="">Select castle</option>
-                        <option value="alnwick">Alnwick Castle</option>
-                        <option value="auckland">Auckland Castle</option>
-                        <option value="bamburgh">Bamburgh Castle</option>
-                        <option value="barnard">Barnard Castle</option>
+                        <option value="Alnwick">Alnwick Castle</option>
+                        <option value="Auckland">Auckland Castle</option>
+                        <option value="Bamburgh">Bamburgh Castle</option>
+                        <option value="Barnard">Barnard Castle</option>
                     </select>
-
                     <select id="travel-day">
                         <option value="">Travel day</option>
                         <option>Sunday</option>
@@ -91,42 +78,33 @@
                 </div>
             </div>
         </section>
-
     </div>
 </header>
-
 <section class="castle-grid">
     <div class="castle" id="alnwick">
         <img src="/images/Alnwick.jpg" alt="Alnwick Castle - A historic site with grand architecture.">
         <h3>Alnwick Castle</h3>
         <p>Famous for its role in movies and medieval history.</p>
-        <button class="info-btn" data-castle="alnwick">Castle Information</button>
+        <button class="info-btn" data-castle="Alnwick">Castle Information</button>
     </div>
-
     <div class="castle" id="auckland">
         <img src="/images/Auckland.jpg" alt="Auckland Castle - A stunning medieval palace.">
         <h3>Auckland Castle</h3>
         <p>Known for its beautiful gardens and rich history.</p>
-        <button class="info-btn" data-castle="auckland">Castle Information</button>
+        <button class="info-btn" data-castle="Auckland">Castle Information</button>
     </div>
-
     <div class="castle" id="bamburgh">
         <img src="/images/Bamburgh.jpg" alt="Bamburgh Castle - A coastal fortress with breathtaking views.">
         <h3>Bamburgh Castle</h3>
         <p>Overlooks the sea with a fascinating past.</p>
-        <button class="info-btn" data-castle="bamburgh">Castle Information</button>
+        <button class="info-btn" data-castle="Bamburgh">Castle Information</button>
     </div>
-
     <div class="castle" id="barnard">
         <img src="images/Barnard.jpg" alt="Barnard Castle - A scenic ruin with cultural significance.">
         <h3>Barnard Castle</h3>
         <p>Offers stunning landscapes and a historic feel.</p>
-        <button class="info-btn" data-castle="barnard">Castle Information</button>
+        <button class="info-btn" data-castle="Barnard">Castle Information</button>
     </div>
 </section>
-
-<script src="/js/HomePage.js" defer></script>
-
 </body>
-
 </html>

@@ -285,7 +285,7 @@ body {
 }
 
 .hidden {
-    display: none !important;
+    display: none;
 }
 
 
@@ -365,66 +365,66 @@ body {
 
 @media screen and (max-width: 768px) {
     body {
-        padding: 0px !important;
-        margin: 0px !important;
-        font-size: 14px !important;
+        padding: 0px;
+        margin: 0px;
+        font-size: 14px;
     }
 
     .hero {
-        height: auto !important;
-        background-position: center !important;
-        overflow: visible !important;
-        width: 100vw !important;
-        padding: 0px !important;
-        margin: 0px !important;
+        height: auto;
+        background-position: center;
+        overflow: visible;
+        width: 100vw;
+        padding: 0px;
+        margin: 0px;
     }
 
     .hero-overlay {
-        position: relative !important;
-        height: auto !important;
-        padding: 0px !important;
+        position: relative;
+        height: auto;
+        padding: 0px;
         background: rgba(0, 0, 0, 0.4);
         box-sizing: border-box;
-        overflow: visible !important;
+        overflow: visible;
         width: 100%;
     }
 
     .hero-bar {
         display: flex;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        padding: 10px 20px !important;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
         grid-gap: 10px;
-        width: 100% !important;
+        width: 100%;
     }
 
     .logo {
-        font-size: 30px !important;
+        font-size: 30px;
         text-align: left;
     }
 
     .top-right-controls {
-        width: 100% !important;
-        display: flex !important;
+        width: 100%;
+        display: flex;
         justify-content: flex-end;
         grid-gap: 10px;
     }
 
     .user-section {
-        display: flex !important;
+        display: flex;
         align-items: center;
         grid-gap: 10px;
     }
 
     .search-box {
-        right: 20px !important;
-        top: 120px !important;
-        width: 90% !important;
+        right: 20px;
+        top: 120px;
+        width: 90%;
     }
 
     .castle-grid {
-        grid-template-columns: 1fr !important;
-        padding: 10px !important;
+        grid-template-columns: 1fr;
+        padding: 10px;
     }
 
     .filter-wrapper {
@@ -442,7 +442,7 @@ body {
 
     .filter-grid select {
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
     }
 
     .submit-btn {
@@ -451,14 +451,14 @@ body {
     }
 
     .auth-container {
-        width: 100% !important;
-        box-shadow: none !important;
-        padding: 20px !important;
+        width: 100%;
+        box-shadow: none;
+        padding: 20px;
     }
 
     .page-content {
-        padding: 20px 10px !important;
-        flex-direction: column !important;
+        padding: 20px 10px;
+        flex-direction: column;
     }
 
     .info-card {
