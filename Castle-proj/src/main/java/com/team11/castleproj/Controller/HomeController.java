@@ -19,6 +19,7 @@
  * 4/5 Samuel Leung - Add Itinerary endpoint
  * 5/5 Samuel Leung - Simplify logic of controllers
  * 7/5 Samuel Leung - Update logic to account for day availability of routes
+ * 8/5 Samuel Leung - Add JavaDocs
  */
 package com.team11.castleproj.Controller;
 
@@ -61,6 +62,13 @@ public class HomeController {
         return "homepage";
     }
 
+    /**
+     * Fetches the castle information object given a castle name and displays
+     * it to the user.
+     * @param name castle name
+     * @param model model object to pass to view
+     * @return castle html, otherwise error html with specific message
+     */
     @GetMapping("/castle")
     public String getCastleDetail(@RequestParam("name") String name, Model model) {
         CastleInfo castleInfo = castleRepo.findByName(name.toLowerCase());
@@ -73,6 +81,18 @@ public class HomeController {
         return "castle.html";
     }
 
+    /**
+     * Given the following form parameters filled by the users,
+     * queries for schedules, filtering and returning
+     * relevant round trips
+     * @param departTime depart time object (e.g. 8:00)
+     * @param returnTime return time object (e.g. 16:00)
+     * @param castleName name of castle visited
+     * @param noOfVisitors number of visitors
+     * @param travelDay day of week for castle visit
+     * @param model
+     * @return schedule html, otherwise error html with specific message
+     */
     @GetMapping("/schedules")
     public String selectSchedule(@RequestParam("departTime") LocalTime departTime,
                                  @RequestParam("returnTime") LocalTime returnTime,
@@ -130,6 +150,17 @@ public class HomeController {
         }
     }
 
+    /**
+     * Fetches the relevant itinerary data including the castle information,
+     * schedules, stops, and transfers, displaying it back to the user
+     * @param outboundId ID of outbound schedule
+     * @param returnId ID of return schedule
+     * @param castleName name of castle
+     * @param noOfVisitors number of visitors
+     * @param totalPrice total price given visitors, castle entry, and bus
+     * @param model model object to pass to view
+     * @return itinerary html, otherwise error html with specific message
+     */
     @GetMapping("/itinerary")
     public String displayItinerary(@RequestParam("outboundId") String outboundId,
                                    @RequestParam("returnId") String returnId,
