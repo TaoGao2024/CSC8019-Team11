@@ -2,7 +2,7 @@ package com.team11.castleproj.DTO;
 
 import com.team11.castleproj.Entity.RouteStop;
 import com.team11.castleproj.Entity.ScheduleInfo;
-import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
