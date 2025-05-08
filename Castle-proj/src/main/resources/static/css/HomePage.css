@@ -162,7 +162,7 @@ body {
     border-radius: 20px;
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     color: #666666;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -265,7 +265,7 @@ body {
     right: 0;
     background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -301,7 +301,7 @@ body {
     background: white;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 320px;
     display: flex;
     flex-direction: column;
@@ -433,16 +433,21 @@ body {
     }
 
     .filter-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
         width: 100%;
         grid-gap: 12px;
     }
 
-    .submit-btn {
+    .filter-grid select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
-        width: 160px;
-        margin: 10px auto 0;
-        display: block
+    .submit-btn {
+        width: 100%;
+        margin-top: 10px;
     }
 
     .auth-container {

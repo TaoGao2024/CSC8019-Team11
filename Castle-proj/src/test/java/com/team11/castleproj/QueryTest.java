@@ -30,7 +30,10 @@ public class QueryTest {
         var castle = castleRepo.findByName(castleName);
 
         assertThat(castle).isNotNull();
+        assertThat(castle.getName()).isEqualTo(castleName);
         assertThat(castle.getDescription()).containsIgnoringCase(castleName);
+        assertThat(castle.getEntryFee()).isGreaterThanOrEqualTo(0);
+        assertThat(castle.getOpenTime()).isBefore(castle.getCloseTime());
     }
 
     @Test
@@ -38,8 +41,8 @@ public class QueryTest {
         // test all 4 castles
         for (int i = 1; i <= 4; i++){
             // Find schedules on existing data
-            var outbound = scheduleRepo.findOutboundSchedules(LocalTime.of(9, 0), LocalTime.of(11, 0), "c00" + i);
-            var returnOption = scheduleRepo.findReturnSchedules(LocalTime.of(14, 0), LocalTime.of(16, 0), "c00" + i);
+            var outbound = scheduleRepo.findOutboundSchedules(LocalTime.of(9, 0), LocalTime.of(11, 0), "c00" + i, "Weekday");
+            var returnOption = scheduleRepo.findReturnSchedules(LocalTime.of(14, 0), LocalTime.of(16, 0), "c00" + i, "Weekday");
             assertThat(!outbound.isEmpty()).isNotNull();
             assertThat(!returnOption.isEmpty()).isNotNull();
 

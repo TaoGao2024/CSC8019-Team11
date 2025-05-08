@@ -66,7 +66,7 @@ public class HomeController {
         CastleInfo castleInfo = castleRepo.findByName(name);
         String castleName = castleInfo.getName();
         model.addAttribute("castleInfo", castleInfo);
-        model.addAttribute("castleName", castleName.substring(0,1).toUpperCase()
+        model.addAttribute("castleName", castleName.substring(0, 1).toUpperCase()
                 + castleName.substring(1));
         return "castle.html";
     }
@@ -83,7 +83,7 @@ public class HomeController {
             model.addAttribute("message", "No such castles found.");
             return "error";
         }
-        
+
         String castleId = castleInfo.getCastleId();
         double entryFee = castleInfo.getEntryFee();
         LocalTime openTime = castleInfo.getOpenTime();
@@ -102,11 +102,11 @@ public class HomeController {
         // earliest time after castle opening that user returns
         LocalTime earliestReturn = openTime.plusHours(2);
 
-        for(ScheduleInfo outbound : outboundSchedules) {
-            for(ScheduleInfo returnOption : returnSchedules) {
+        for (ScheduleInfo outbound : outboundSchedules) {
+            for (ScheduleInfo returnOption : returnSchedules) {
                 // recommended earliest time post-arrival that castle trip ends
                 LocalTime earliestFinish = outbound.getArriveTime().plusHours(2);
-                if(earliestFinish.isBefore(returnOption.getDepartTime())
+                if (earliestFinish.isBefore(returnOption.getDepartTime())
                         && earliestFinish.isBefore(closeTime)
                         && earliestReturn.isBefore(returnOption.getDepartTime())) {
                     RoundTripDTO dto = new RoundTripDTO(outbound, returnOption);
@@ -115,12 +115,12 @@ public class HomeController {
                 }
             }
         }
+        roundTripList = roundTripList.size() > 6 ? roundTripList.subList(0, 6) : roundTripList;
 
-        if(roundTripList.isEmpty()) {
+        if (roundTripList.isEmpty()) {
             model.addAttribute("message", "No itineraries found. Please try adjusting the time or day of your visit.");
             return "error";
-        }
-        else {
+        } else {
             model.addAttribute("roundTripList", roundTripList);
             model.addAttribute("castleName", castleName.substring(0, 1).toUpperCase() + castleName.substring(1));
             model.addAttribute("noOfVisitors", noOfVisitors);
@@ -139,7 +139,7 @@ public class HomeController {
         ScheduleInfo returnOption = scheduleRepo.findByScheduleId(returnId);
         List<RouteStop> outboundStops = routeStopRepo.findRouteStopsByRouteId(outbound.getRouteId());
         List<RouteStop> returnStops = routeStopRepo.findRouteStopsByRouteId(returnOption.getRouteId());
-        if(outboundStops.isEmpty() || returnStops.isEmpty()) {
+        if (outboundStops.isEmpty() || returnStops.isEmpty()) {
             model.addAttribute("message", "Error: Bus stops missing.");
             return "error";
         }
